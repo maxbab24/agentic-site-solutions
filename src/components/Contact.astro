@@ -1,0 +1,121 @@
+---
+---
+
+<section id="contact" class="py-24 bg-gray-950">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Label -->
+    <p class="text-emerald-400 text-xs font-bold uppercase tracking-widest text-center mb-3">
+      Contact
+    </p>
+    <h2 class="text-3xl sm:text-4xl font-bold text-white text-center mb-4">
+      Get a Free Quote
+    </h2>
+    <p class="text-gray-400 text-center max-w-xl mx-auto mb-14">
+      Tell us about your business and we'll get back to you within 24 hours.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 max-w-4xl mx-auto">
+      <!-- Left: Contact Info -->
+      <div class="flex flex-col justify-center">
+        <h3 class="text-lg font-bold text-white mb-6">Contact Information</h3>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <span class="text-emerald-400 text-lg mt-0.5">✉</span>
+            <div>
+              <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-0.5">Email</p>
+              <p class="text-gray-400 italic text-sm">[your@email.com]</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-emerald-400 text-lg mt-0.5">⏱</span>
+            <div>
+              <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-0.5">Response Time</p>
+              <p class="text-gray-300 text-sm">Within 24 hours</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-emerald-400 text-lg mt-0.5">🌍</span>
+            <div>
+              <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-0.5">Service Area</p>
+              <p class="text-gray-300 text-sm">Nationwide (US)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div>
+        <form
+          name="contact"
+          method="POST"
+          class="space-y-5"
+        >
+          <div>
+            <label for="name" class="block text-sm font-semibold text-gray-300 mb-1.5">
+              Name
+            </label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              required
+              placeholder="Jane Smith"
+              class="w-full bg-gray-900 border border-gray-700 focus:border-emerald-500 text-gray-100 placeholder-gray-600 rounded-lg px-4 py-3 text-sm outline-none transition-colors duration-200"
+            />
+          </div>
+
+          <div>
+            <label for="business" class="block text-sm font-semibold text-gray-300 mb-1.5">
+              Business Name
+            </label>
+            <input
+              id="business"
+              type="text"
+              name="business"
+              required
+              placeholder="Acme Coffee Co."
+              class="w-full bg-gray-900 border border-gray-700 focus:border-emerald-500 text-gray-100 placeholder-gray-600 rounded-lg px-4 py-3 text-sm outline-none transition-colors duration-200"
+            />
+          </div>
+
+          <div>
+            <label for="website" class="block text-sm font-semibold text-gray-300 mb-1.5">
+              Current Website URL
+            </label>
+            <input
+              id="website"
+              type="url"
+              name="website"
+              placeholder="https://yoursite.com"
+              class="w-full bg-gray-900 border border-gray-700 focus:border-emerald-500 text-gray-100 placeholder-gray-600 rounded-lg px-4 py-3 text-sm outline-none transition-colors duration-200"
+            />
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-semibold text-gray-300 mb-1.5">
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={4}
+              placeholder="Tell us about your business and what you're looking to achieve..."
+              class="w-full bg-gray-900 border border-gray-700 focus:border-emerald-500 text-gray-100 placeholder-gray-600 rounded-lg px-4 py-3 text-sm outline-none transition-colors duration-200 resize-none"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold py-3.5 rounded-lg transition-colors duration-200"
+          >
+            Send Message
+          </button>
+        </form>
+
+        <p class="text-center text-gray-500 text-xs mt-4">
+          No commitment. No pressure. Just a conversation.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

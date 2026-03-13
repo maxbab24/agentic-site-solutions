@@ -1,0 +1,46 @@
+---
+const footerLinks = [
+  { label: 'Services', href: '#services' },
+  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-gray-950 border-t border-gray-800">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-col items-center text-center gap-6 mb-10">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-0.5 text-lg font-bold">
+        <span class="text-white">Agentic</span>
+        <span class="text-emerald-400">Site Solutions</span>
+      </a>
+
+      <!-- Tagline -->
+      <p class="text-gray-400 text-sm max-w-xs">
+        Building the web for the AI era.
+      </p>
+
+      <!-- Nav Links -->
+      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+        {footerLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-gray-400 hover:text-emerald-400 text-sm transition-colors duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-600">
+      <p>&copy; {currentYear} AgenticSiteSolutions. All rights reserved.</p>
+      <p>Built with Astro + AI</p>
+    </div>
+  </div>
+</footer>
