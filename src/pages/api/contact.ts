@@ -1,8 +1,9 @@
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   try {
     const formData = await request.formData();
     const name = formData.get('name')?.toString() || '';
@@ -15,8 +16,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       return new Response(JSON.stringify({ ok: true }), { status: 200 });
     }
 
-    const runtime = (locals as any).runtime;
-    const resendKey = runtime?.env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
+    const resendKey = (env as any).RESEND_API_KEY;
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
