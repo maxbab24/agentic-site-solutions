@@ -45,15 +45,9 @@
 
       <!-- Right: Form -->
       <div>
-        <form
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          class="space-y-5"
-        >
-          <input type="hidden" name="form-name" value="contact" />
+        <form id="contact-form" class="space-y-5">
           <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
           <div>
             <label for="name" class="block text-sm font-semibold text-gray-300 mb-1.5">
               Name
@@ -110,10 +104,13 @@
 
           <button
             type="submit"
+            id="submit-btn"
             class="w-full bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold py-3.5 rounded-lg transition-colors duration-200"
           >
             Send Message
           </button>
+
+          <div id="form-status" class="hidden text-center text-sm py-2 rounded-lg"></div>
         </form>
 
         <p class="text-center text-gray-500 text-xs mt-4">
@@ -123,3 +120,39 @@
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const btn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const status = document.getElementById('form-status') as HTMLDivElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    status.className = 'hidden';
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        body: new FormData(form),
+      });
+      const data = await res.json();
+
+      if (data.ok) {
+        form.reset();
+        status.textContent = "Message sent! We'll be in touch within 24 hours.";
+        status.className = 'text-center text-sm py-2 rounded-lg text-emerald-400 bg-emerald-500/10 border border-emerald-500/20';
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+      } else {
+        throw new Error('Failed');
+      }
+    } catch {
+      status.textContent = 'Something went wrong. Please email us directly at max@agenticsitesolutions.com';
+      status.className = 'text-center text-sm py-2 rounded-lg text-red-400 bg-red-500/10 border border-red-500/20';
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+    }
+  });
+</script>
