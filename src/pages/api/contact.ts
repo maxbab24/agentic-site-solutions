@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
     const formData = await request.formData();
     const name = formData.get('name')?.toString() || '';
@@ -15,7 +15,8 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ ok: true }), { status: 200 });
     }
 
-    const resendKey = import.meta.env.RESEND_API_KEY;
+    const runtime = (locals as any).runtime;
+    const resendKey = runtime?.env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
