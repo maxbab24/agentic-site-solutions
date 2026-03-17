@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { Resend } from 'resend';
 import { env } from 'cloudflare:workers';
 
 export const prerender = false;
@@ -16,38 +17,37 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ ok: true }), { status: 200 });
     }
 
-    const resendKey = (env as any).RESEND_API_KEY;
+    const apiKey = (env as any).RESEND_API_KEY;
 
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${resendKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'AgenticSiteSolutions <max@outreach.agenticsitesolutions.com>',
-        to: 'inquiry@agenticsitesolutions.com',
-        subject: `New inquiry from ${business || name}`,
-        html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Business:</strong> ${business}</p>
-          <p><strong>Website:</strong> ${website || 'Not provided'}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message.replace(/\n/g, '<br>')}</p>
-        `,
-      }),
+    if (!apiKey) {
+      return new Response(JSON.stringify({ ok: false, error: 'Missing API key' }), { status: 500 });
+    }
+
+    const resend = new Resend(apiKey);
+
+    const { error } = await resend.emails.send({
+      from: 'AgenticSiteSolutions <max@outreach.agenticsitesolutions.com>',
+      to: 'inquiry@agenticsitesolutions.com',
+      subject: `New inquiry from ${business || name}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Business:</strong> ${business}</p>
+        <p><strong>Website:</strong> ${website || 'Not provided'}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `,
     });
 
-    if (!res.ok) {
-      const err = await res.text();
-      console.error('Resend error:', err);
-      return new Response(JSON.stringify({ ok: false }), { status: 500 });
+    if (error) {
+      console.error('Resend error:', error);
+      return new Response(JSON.stringify({ ok: false, error: error.message }), { status: 500 });
     }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
   } catch (err) {
-    console.error('Contact error:', err);
-    return new Response(JSON.stringify({ ok: false }), { status: 500 });
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error('Contact error:', msg);
+    return new Response(JSON.stringify({ ok: false, error: msg }), { status: 500 });
   }
 };

@@ -146,10 +146,10 @@
         btn.textContent = 'Send Message';
         btn.disabled = false;
       } else {
-        throw new Error('Failed');
+        throw new Error(data.error || 'Failed');
       }
-    } catch {
-      status.textContent = 'Something went wrong. Please email us directly at max@agenticsitesolutions.com';
+    } catch (err: any) {
+      status.textContent = err?.message || 'Something went wrong. Please email us directly at inquiry@agenticsitesolutions.com';
       status.className = 'text-center text-sm py-2 rounded-lg text-red-400 bg-red-500/10 border border-red-500/20';
       btn.textContent = 'Send Message';
       btn.disabled = false;
