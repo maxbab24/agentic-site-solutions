@@ -1,13 +1,5 @@
 {
-	"compatibility_date": "2026-03-12",
-	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "agentic-site-solutions",
-	"main": "@astrojs/cloudflare/entrypoints/server",
-	"assets": {
-		"directory": "./dist/client",
-		"binding": "ASSETS"
-	},
-	"observability": {
-		"enabled": true
-	}
+	"compatibility_date": "2026-03-12",
+	"pages_build_output_dir": "./dist"
 }
