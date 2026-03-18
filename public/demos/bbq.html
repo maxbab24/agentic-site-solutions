@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smoke &amp; Soul BBQ — Real Smoke. Real Soul.</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&display=swap');
+
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:      #7F1D1D;
+      --orange:   #EA580C;
+      --cream:    #FEF3C7;
+      --brown:    #78350F;
+      --charcoal: #1C1917;
+      --offwhite: #FAFAF9;
+      --dark:     #0C0A09;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--charcoal);
+      color: var(--offwhite);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    img { display: block; width: 100%; object-fit: cover; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--charcoal);
+      border-bottom: 2px solid var(--brown);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.55);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--cream);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-logo span { color: var(--orange); }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.2rem;
+    }
+
+    .nav-links a {
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--offwhite);
+      text-decoration: none;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--orange);
+      border-color: var(--orange);
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background-color: var(--brown);
+    }
+
+    /* Wood-grain CSS pattern base */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          92deg,
+          rgba(120,53,15,0.18) 0px,
+          rgba(120,53,15,0.18) 1px,
+          transparent 1px,
+          transparent 38px
+        ),
+        repeating-linear-gradient(
+          178deg,
+          rgba(28,25,23,0.22) 0px,
+          rgba(28,25,23,0.22) 1px,
+          transparent 1px,
+          transparent 12px
+        );
+      z-index: 1;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1800&q=80');
+      background-size: cover;
+      background-position: center 40%;
+      z-index: 0;
+    }
+
+    /* Dark gradient overlay */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(12,10,9,0.78) 0%,
+        rgba(28,25,23,0.65) 40%,
+        rgba(120,53,15,0.55) 100%
+      );
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      max-width: 860px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 1rem;
+    }
+
+    .hero-headline {
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 1.05;
+      text-shadow: 0 4px 32px rgba(0,0,0,0.7);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: #FDBA74;
+    }
+
+    .hero-sub {
+      font-size: 1.18rem;
+      font-weight: 300;
+      color: #E7D5B3;
+      max-width: 560px;
+      margin: 0 auto 2.2rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      line-height: 1.6;
+    }
+
+    .btn-orange {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2.6rem;
+      border-radius: 3px;
+      border: 2px solid var(--orange);
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+      box-shadow: 0 4px 20px rgba(234,88,12,0.35);
+    }
+
+    .btn-orange:hover {
+      background: transparent;
+      color: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    .hero-divider {
+      margin-top: 3rem;
+      font-size: 1.3rem;
+      color: var(--orange);
+      letter-spacing: 0.12em;
+      opacity: 0.85;
+    }
+
+    /* ─── SECTION LABELS ─── */
+    .section-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ─── SIGNATURE DISHES ─── */
+    #dishes {
+      background: var(--cream);
+      color: var(--charcoal);
+      padding: 6rem 2.5rem;
+      position: relative;
+    }
+
+    /* Subtle diagonal stripe pattern */
+    #dishes::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(120,53,15,0.04) 0px,
+        rgba(120,53,15,0.04) 2px,
+        transparent 2px,
+        transparent 18px
+      );
+      pointer-events: none;
+    }
+
+    #dishes .section-label { color: var(--red); }
+    #dishes .section-title { color: var(--brown); }
+
+    .dishes-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .dishes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1160px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .dish-card {
+      background: #FFF8E7;
+      border-top: 5px solid var(--red);
+      border-radius: 4px;
+      box-shadow: 0 6px 28px rgba(28,25,23,0.13), 0 1px 4px rgba(28,25,23,0.08);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    /* Paper texture on cards */
+    .dish-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          rgba(120,53,15,0.025) 0px,
+          rgba(120,53,15,0.025) 1px,
+          transparent 1px,
+          transparent 24px
+        );
+      pointer-events: none;
+    }
+
+    .dish-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 48px rgba(28,25,23,0.2), 0 2px 6px rgba(28,25,23,0.1);
+    }
+
+    .dish-card img {
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .dish-card-body {
+      padding: 1.5rem 1.6rem 1.8rem;
+    }
+
+    .dish-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .dish-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.7rem;
+    }
+
+    .dish-desc {
+      font-size: 0.95rem;
+      color: #5a3a18;
+      line-height: 1.65;
+    }
+
+    /* ─── FULL MENU ─── */
+    #menu {
+      background: var(--brown);
+      padding: 6rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Diagonal stripe on menu */
+    #menu::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0.1) 0px,
+        rgba(0,0,0,0.1) 1px,
+        transparent 1px,
+        transparent 22px
+      );
+      pointer-events: none;
+    }
+
+    .menu-inner {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .menu-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .menu-header .section-title { color: var(--cream); }
+
+    /* Barbwire-style border */
+    .barbwire-border {
+      border: none;
+      border-top: 3px dashed rgba(254,243,199,0.3);
+      margin: 2.5rem 0;
+      position: relative;
+    }
+
+    .barbwire-border::before {
+      content: '✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--brown);
+      padding: 0 1rem;
+      font-size: 0.65rem;
+      color: rgba(254,243,199,0.3);
+      letter-spacing: 0.2em;
+      white-space: nowrap;
+    }
+
+    .menu-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .menu-section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--orange);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(254,243,199,0.1);
+      gap: 1rem;
+    }
+
+    .menu-item:last-child { border-bottom: none; }
+
+    .menu-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--cream);
+      font-weight: 600;
+    }
+
+    .menu-item-desc {
+      font-size: 0.82rem;
+      color: #C4A882;
+      margin-top: 0.15rem;
+    }
+
+    .menu-item-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--orange);
+      white-space: nowrap;
+    }
+
+    .menu-item-left { flex: 1; }
+
+    /* ─── OUR STORY ─── */
+    #story {
+      background: var(--charcoal);
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 640px;
+    }
+
+    .story-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-image img {
+      height: 100%;
+      min-height: 560px;
+      object-fit: cover;
+      object-position: center;
+      filter: sepia(18%) brightness(0.88);
+    }
+
+    .story-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 70%, var(--charcoal) 100%);
+    }
+
+    .story-content {
+      padding: 5rem 4rem 5rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .story-content .section-title {
+      color: var(--cream);
+      margin-bottom: 1.4rem;
+    }
+
+    .story-content p {
+      color: #C4A882;
+      margin-bottom: 1.1rem;
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    .story-content p strong {
+      color: var(--cream);
+    }
+
+    .story-blockquote {
+      margin-top: 2.2rem;
+      padding: 1.4rem 1.8rem;
+      border-left: 4px solid var(--orange);
+      background: rgba(120,53,15,0.25);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .story-blockquote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.12rem;
+      color: var(--cream) !important;
+      margin-bottom: 0.6rem !important;
+    }
+
+    .story-blockquote cite {
+      font-size: 0.85rem;
+      color: var(--orange);
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── CATERING ─── */
+    #catering {
+      background: var(--orange);
+      padding: 6rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #catering::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        -55deg,
+        rgba(0,0,0,0.06) 0px,
+        rgba(0,0,0,0.06) 2px,
+        transparent 2px,
+        transparent 20px
+      );
+      pointer-events: none;
+    }
+
+    #catering .section-label { color: rgba(12,10,9,0.65); }
+
+    .catering-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .catering-desc {
+      font-size: 1.08rem;
+      color: rgba(12,10,9,0.78);
+      max-width: 580px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .catering-items {
+      display: flex;
+      justify-content: center;
+      gap: 3.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .catering-item {
+      text-align: center;
+    }
+
+    .catering-icon {
+      font-size: 2.6rem;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .catering-item-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+
+    .catering-item-sub {
+      font-size: 0.88rem;
+      color: rgba(12,10,9,0.65);
+      margin-top: 0.2rem;
+    }
+
+    .btn-dark-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--charcoal);
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2.6rem;
+      border-radius: 3px;
+      border: 2px solid var(--charcoal);
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+      position: relative;
+    }
+
+    .btn-dark-outline:hover {
+      background: var(--charcoal);
+      color: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    /* ─── HOURS & LOCATION ─── */
+    #location {
+      background: var(--charcoal);
+      padding: 6rem 2.5rem;
+      position: relative;
+      border-top: 1px solid rgba(254,243,199,0.08);
+    }
+
+    .location-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+
+    .location-header {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .location-header .section-title { color: var(--cream); }
+
+    .hours-col h3, .address-col h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      color: var(--orange);
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(234,88,12,0.3);
+    }
+
+    .hours-list {
+      list-style: none;
+    }
+
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(254,243,199,0.07);
+      font-size: 0.98rem;
+      color: #C4A882;
+    }
+
+    .hours-list li:last-child { border-bottom: none; }
+
+    .hours-list .day { color: var(--cream); font-weight: 700; }
+    .hours-list .time { color: #C4A882; }
+
+    .address-col p {
+      color: #C4A882;
+      margin-bottom: 0.7rem;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .address-col .big-address {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--cream);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .address-col .phone {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 0.05em;
+    }
+
+    .lone-star {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-top: 0.5rem;
+      opacity: 0.7;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark);
+      padding: 3.5rem 2.5rem 2rem;
+      text-align: center;
+      border-top: 3px solid var(--brown);
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-logo span { color: var(--orange); }
+
+    .footer-since {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #78716C;
+      margin-bottom: 1.6rem;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .footer-socials a {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #78716C;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .footer-socials a:hover {
+      color: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: #44403C;
+    }
+
+    /* ─── FLAME DIVIDER ─── */
+    .flame-divider {
+      text-align: center;
+      font-size: 1rem;
+      letter-spacing: 0.5rem;
+      color: var(--orange);
+      padding: 2.5rem 0 0;
+      opacity: 0.85;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .dishes-grid { grid-template-columns: 1fr; max-width: 520px; }
+      .menu-cols { grid-template-columns: 1fr; gap: 2.5rem; }
+      #story { grid-template-columns: 1fr; }
+      .story-image { display: none; }
+      .story-content { padding: 4rem 2rem; }
+      .location-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .location-header { grid-column: 1; }
+      .nav-links { gap: 1.2rem; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1.2rem; }
+      .nav-logo { font-size: 1.15rem; }
+      .nav-links { gap: 0.9rem; }
+      .nav-links a { font-size: 0.78rem; }
+      #dishes, #menu, #catering, #location { padding: 4rem 1.2rem; }
+    }
+
+    /* ─── SCROLL ANIMATION STUB ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="#">🔥 Smoke &amp; <span>Soul</span> BBQ</a>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#catering">Catering</a></li>
+      <li><a href="#location">Find Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Mason, Texas &nbsp;·&nbsp; Est. 1987</p>
+      <h1 class="hero-headline">Real Smoke.<br><em>Real Soul.</em></h1>
+      <p class="hero-sub">Family recipes passed down three generations, smoked low &amp; slow since 1987. Pull up a chair — you're family now.</p>
+      <a href="#menu" class="btn-orange">See Our Menu</a>
+      <div class="hero-divider">· · · · · 🔥 · · · · ·</div>
+    </div>
+  </section>
+
+  <!-- ── SIGNATURE DISHES ── -->
+  <section id="dishes">
+    <div class="dishes-header fade-in">
+      <p class="section-label">🍖 Straight from the Pit</p>
+      <h2 class="section-title">What We're Known For</h2>
+      <p style="color:#78350F; max-width:520px; margin:0.8rem auto 0; font-size:1rem;">Every plate tells a story. Every bite earns a memory.</p>
+    </div>
+
+    <div class="dishes-grid">
+
+      <article class="dish-card fade-in">
+        <img
+          src="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=800&q=80"
+          alt="Pitmaster's Brisket"
+          height="240"
+        />
+        <div class="dish-card-body">
+          <span class="dish-tag">🔥 Signature Cut</span>
+          <h3 class="dish-name">The Pitmaster's Brisket</h3>
+          <p class="dish-desc">14 hours over post oak smoke. Prime beef brisket with a peppercorn bark so dark it looks like coal — and tastes like heaven. Sliced thick. Served right.</p>
+        </div>
+      </article>
+
+      <article class="dish-card fade-in">
+        <img
+          src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+          alt="Holy Smoke Ribs"
+          height="240"
+        />
+        <div class="dish-card-body">
+          <span class="dish-tag">🍖 Fan Favorite</span>
+          <h3 class="dish-name">Holy Smoke Ribs</h3>
+          <p class="dish-desc">St. Louis-style spare ribs, rubbed down with our secret blend and left to the smoke for six sacred hours. Fall-off-the-bone. Sticky-finger mandatory.</p>
+        </div>
+      </article>
+
+      <article class="dish-card fade-in">
+        <img
+          src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=800&q=80"
+          alt="Pulled Pork Sandwich"
+          height="240"
+        />
+        <div class="dish-card-body">
+          <span class="dish-tag">🥪 Southern Classic</span>
+          <h3 class="dish-name">Pulled Pork Sandwich</h3>
+          <p class="dish-desc">Slow-smoked pork shoulder, hand-pulled and piled high on a toasted brioche bun. Topped with our tangy house slaw and a drizzle of smokehouse sauce.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="flame-divider">· · · 🔥 · · ·</div>
+  </section>
+
+  <!-- ── FULL MENU ── -->
+  <section id="menu">
+    <div class="menu-inner">
+      <div class="menu-header fade-in">
+        <p class="section-label">— The Full Spread —</p>
+        <h2 class="section-title" style="color:var(--cream); font-style:italic;">Our Menu</h2>
+      </div>
+
+      <div class="barbwire-border"></div>
+
+      <div class="menu-cols fade-in">
+        <!-- MAINS -->
+        <div>
+          <h3 class="menu-section-heading">🔥 Mains</h3>
+
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Brisket Plate</div>
+              <div class="menu-item-desc">Half-pound sliced brisket, two sides</div>
+            </div>
+            <div class="menu-item-price">$18</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Full Rib Rack</div>
+              <div class="menu-item-desc">St. Louis spare ribs, full slab with two sides</div>
+            </div>
+            <div class="menu-item-price">$24</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Pulled Pork Sandwich</div>
+              <div class="menu-item-desc">House slaw, brioche bun, smokehouse sauce</div>
+            </div>
+            <div class="menu-item-price">$14</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Smoked Chicken</div>
+              <div class="menu-item-desc">Half bird, hickory smoked, skin-on</div>
+            </div>
+            <div class="menu-item-price">$15</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Burnt Ends</div>
+              <div class="menu-item-desc">Brisket point cubes, caramelized &amp; sauced</div>
+            </div>
+            <div class="menu-item-price">$16</div>
+          </div>
+        </div>
+
+        <!-- SIDES -->
+        <div>
+          <h3 class="menu-section-heading">🌽 Sides &amp; Extras</h3>
+
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Coleslaw</div>
+              <div class="menu-item-desc">Grandma Earl's creamy vinegar blend</div>
+            </div>
+            <div class="menu-item-price">$4</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Mac &amp; Cheese</div>
+              <div class="menu-item-desc">Three-cheese, smoked gouda top crust</div>
+            </div>
+            <div class="menu-item-price">$5</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Cornbread</div>
+              <div class="menu-item-desc">Cast-iron skillet, jalapeño honey butter</div>
+            </div>
+            <div class="menu-item-price">$3</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Baked Beans</div>
+              <div class="menu-item-desc">Slow-cooked with burnt end drippings</div>
+            </div>
+            <div class="menu-item-price">$4</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Sweet Potato Fries</div>
+              <div class="menu-item-desc">Crispy, seasoned with our house spice blend</div>
+            </div>
+            <div class="menu-item-price">$5</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="barbwire-border" style="margin-top:3rem;"></div>
+
+      <p style="text-align:center; color:#C4A882; font-size:0.88rem; margin-top:1.5rem; position:relative;">
+        All plates served with choice of two sides. Sauce on the side — always.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── OUR STORY ── -->
+  <section id="story">
+    <div class="story-image">
+      <img
+        src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=900&q=80"
+        alt="BBQ Smoker Pit"
+      />
+      <div class="story-image-overlay"></div>
+    </div>
+
+    <div class="story-content fade-in">
+      <p class="section-label">🌿 Since 1987</p>
+      <h2 class="section-title">Three Generations<br>of Smoke</h2>
+
+      <p>It started with <strong>Grandpa Earl Beaumont</strong> and a hand-welded smoker he built in his backyard in Mason, Texas. Earl didn't have a recipe book — he had instinct, patience, and a whole lot of post oak wood.</p>
+
+      <p>He'd fire up that old pit before the sun rose, season his briskets by feel, and let the smoke do the talking for fourteen hours straight. Neighbors started showing up. Word spread. By 1992, <strong>Smoke &amp; Soul BBQ</strong> was a real honest-to-goodness restaurant on Smokehouse Road.</p>
+
+      <p>Earl passed the tongs to his son <strong>Darnell</strong> in 2001, who added the legendary Holy Smoke Ribs to the menu. Now it's <strong>Lena Beaumont</strong> — Earl's granddaughter — running the pits, keeping the traditions alive, and adding a few innovations of her own.</p>
+
+      <p>Some things never change: the wood, the patience, and the soul.</p>
+
+      <blockquote class="story-blockquote">
+        <p>"Best BBQ I've had outside of Texas. And honestly? Maybe in Texas too."</p>
+        <cite>— Jake R., Houston TX</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ── CATERING ── -->
+  <section id="catering">
+    <div style="position:relative; z-index:1;">
+      <p class="section-label">🍽️ We Come to You</p>
+      <h2 class="catering-title">Feed the Whole Crowd</h2>
+      <p class="catering-desc">Whether it's 20 people or 2,000, Smoke &amp; Soul brings the pit to you. Full-service catering with all the fixings — smoked on-site or delivered hot and ready.</p>
+
+      <div class="catering-items">
+        <div class="catering-item">
+          <span class="catering-icon">💍</span>
+          <div class="catering-item-title">Weddings</div>
+          <div class="catering-item-sub">Custom menus &amp; full setup</div>
+        </div>
+        <div class="catering-item">
+          <span class="catering-icon">🏢</span>
+          <div class="catering-item-title">Corporate Events</div>
+          <div class="catering-item-sub">Boxed meals to full buffets</div>
+        </div>
+        <div class="catering-item">
+          <span class="catering-icon">🎉</span>
+          <div class="catering-item-title">Backyard Parties</div>
+          <div class="catering-item-sub">We bring the smoker to you</div>
+        </div>
+      </div>
+
+      <a href="#location" class="btn-dark-outline">Get a Quote</a>
+    </div>
+  </section>
+
+  <!-- ── HOURS & LOCATION ── -->
+  <section id="location">
+    <div class="location-inner">
+      <div class="location-header fade-in">
+        <p class="section-label">📍 Come Find Us</p>
+        <h2 class="section-title">Hours &amp; Location</h2>
+      </div>
+
+      <div class="hours-col fade-in">
+        <h3>🕐 Hours</h3>
+        <ul class="hours-list">
+          <li><span class="day">Monday – Thursday</span><span class="time">11am – 9pm</span></li>
+          <li><span class="day">Friday – Saturday</span><span class="time">11am – 10pm</span></li>
+          <li><span class="day">Sunday</span><span class="time">12pm – 8pm</span></li>
+        </ul>
+        <p style="color:#78716C; font-size:0.85rem; margin-top:1.2rem;">Kitchen closes 30 minutes before closing. Last smoke comes off the pit at 7pm daily — get here early or miss out.</p>
+      </div>
+
+      <div class="address-col fade-in">
+        <h3>📍 Find Us</h3>
+        <p class="big-address">456 Smokehouse Road<br>Mason, TX 78956</p>
+        <p class="phone">(325) 555-0187</p>
+        <p style="margin-top:0.9rem; font-size:0.92rem;">catering@smokeandsoulbbq.com</p>
+        <div class="lone-star">⭐ &nbsp; Texas Proud Since 1987 &nbsp; ⭐</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">🔥 Smoke &amp; <span>Soul</span> BBQ</div>
+    <p class="footer-since">· Since 1987 · Mason, Texas ·</p>
+    <div class="footer-socials">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Smoke &amp; Soul BBQ, LLC. All rights reserved. No leftovers.</p>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+    // Sticky nav background intensity on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.style.boxShadow = '0 2px 28px rgba(0,0,0,0.8)';
+      } else {
+        nav.style.boxShadow = '0 2px 18px rgba(0,0,0,0.55)';
+      }
+    });
+  </script>
+
+</body>
+</html>

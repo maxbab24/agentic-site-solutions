@@ -1,21 +1,174 @@
 ---
+const demos = [
+  {
+    id: "icecream",
+    title: "Scoops & Dreams",
+    category: "Ice Cream Shop",
+    description: "A vibrant, colorful site for a playful ice cream shop — bursting with personality.",
+    src: "/demos/icecream.html",
+    thumbnail: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=600&q=80&fit=crop",
+    accent: "#FF6B9D",
+    tag: "Food & Beverage",
+  },
+  {
+    id: "bbq",
+    title: "Smoke & Soul BBQ",
+    category: "BBQ Restaurant",
+    description: "Southern charm meets bold design — rustic, warm, and full of character.",
+    src: "/demos/bbq.html",
+    thumbnail: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80&fit=crop",
+    accent: "#EA580C",
+    tag: "Restaurant",
+  },
+  {
+    id: "landscaping",
+    title: "Green Thumb Landscapes",
+    category: "Landscaping Service",
+    description: "A professional yet earthy service site that makes outdoor spaces come alive.",
+    src: "/demos/landscaping.html",
+    thumbnail: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80&fit=crop",
+    accent: "#65A30D",
+    tag: "Home Services",
+  },
+];
 ---
 
 <section id="portfolio" class="py-24 bg-gray-950">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Section Label -->
     <p class="text-emerald-400 text-xs font-bold uppercase tracking-widest text-center mb-3">
-      Our Work
+      Example Work
     </p>
-    <h2 class="text-3xl sm:text-4xl font-bold text-white text-center mb-12">
-      Recent Work
+    <h2 class="text-3xl sm:text-4xl font-bold text-white text-center mb-4">
+      See What We Build
     </h2>
+    <p class="text-gray-400 text-center max-w-xl mx-auto mb-12">
+      Click any example to preview a live demo — every site is custom-built for its industry.
+    </p>
 
-    <!-- Coming Soon -->
-    <div class="text-center border border-dashed border-gray-800 rounded-xl py-12 px-6">
-      <p class="text-gray-500 text-base">
-        Case studies coming soon — we're just getting started.
-      </p>
+    <!-- Cards grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      {demos.map((demo) => (
+        <button
+          class="demo-card group text-left rounded-2xl overflow-hidden border border-gray-800 bg-gray-900 hover:border-gray-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus:outline-none"
+          data-src={demo.src}
+          data-title={demo.title}
+        >
+          <!-- Thumbnail -->
+          <div class="relative overflow-hidden h-48">
+            <img
+              src={demo.thumbnail}
+              alt={demo.title}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300" />
+            <!-- Tag pill -->
+            <span
+              class="absolute top-3 left-3 text-xs font-bold px-3 py-1 rounded-full text-white"
+              style={`background-color: ${demo.accent};`}
+            >
+              {demo.tag}
+            </span>
+            <!-- Preview icon -->
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="bg-white/90 rounded-full px-4 py-2 text-sm font-semibold text-gray-900 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.882v6.236a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+                </svg>
+                Preview Site
+              </div>
+            </div>
+          </div>
+          <!-- Card body -->
+          <div class="p-5">
+            <p class="text-xs font-semibold uppercase tracking-widest mb-1" style={`color: ${demo.accent};`}>
+              {demo.category}
+            </p>
+            <h3 class="text-white font-bold text-lg mb-2">{demo.title}</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">{demo.description}</p>
+          </div>
+        </button>
+      ))}
     </div>
   </div>
 </section>
+
+<!-- Preview Modal -->
+<div
+  id="demo-modal"
+  class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-8"
+  aria-modal="true"
+  role="dialog"
+>
+  <!-- Backdrop -->
+  <div id="demo-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+
+  <!-- Modal window -->
+  <div class="relative z-10 w-full max-w-5xl flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-gray-700" style="height: 85vh;">
+    <!-- Modal header bar -->
+    <div class="flex items-center justify-between bg-gray-900 px-4 py-3 border-b border-gray-700 shrink-0">
+      <!-- Fake browser dots -->
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+        <span class="w-3 h-3 rounded-full bg-yellow-400"></span>
+        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+      </div>
+      <!-- Title -->
+      <p id="demo-modal-title" class="text-gray-300 text-sm font-medium"></p>
+      <!-- Close -->
+      <button
+        id="demo-close"
+        class="text-gray-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-gray-700"
+        aria-label="Close preview"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <!-- iframe -->
+    <iframe
+      id="demo-iframe"
+      src=""
+      class="w-full flex-1 bg-white"
+      title="Site preview"
+      sandbox="allow-scripts allow-same-origin"
+    ></iframe>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("demo-modal") as HTMLElement;
+  const iframe = document.getElementById("demo-iframe") as HTMLIFrameElement;
+  const modalTitle = document.getElementById("demo-modal-title") as HTMLElement;
+  const closeBtn = document.getElementById("demo-close") as HTMLElement;
+  const backdrop = document.getElementById("demo-backdrop") as HTMLElement;
+
+  function openModal(src: string, title: string) {
+    iframe.src = src;
+    modalTitle.textContent = title;
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+    iframe.src = "";
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".demo-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const src = (card as HTMLElement).dataset.src ?? "";
+      const title = (card as HTMLElement).dataset.title ?? "";
+      openModal(src, title);
+    });
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", closeModal);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>

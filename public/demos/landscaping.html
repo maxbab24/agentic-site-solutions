@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Thumb Landscapes — Austin's Trusted Landscaping Pros</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap');
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:   #166534;
+      --lime:     #65A30D;
+      --sky:      #0EA5E9;
+      --brown:    #92400E;
+      --stone:    #78716C;
+      --offwhite: #FAFAF7;
+      --dark:     #1A2E1A;
+      --warm-bg:  #F5F2EE;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--dark);
+      background: var(--offwhite);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Raleway', sans-serif;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    a { text-decoration: none; color: inherit; }
+
+
+    /* ══════════════════════════════════════
+       NAV
+    ══════════════════════════════════════ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--offwhite);
+      border-bottom: 2px solid #e4f0e4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+      box-shadow: 0 2px 16px rgba(22,101,52,0.07);
+    }
+
+    .nav-logo {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--forest);
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--forest);
+      letter-spacing: 0.3px;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      border-bottom-color: var(--lime);
+      color: var(--lime);
+    }
+
+    .nav-phone {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--forest);
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    .nav-phone span {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--stone);
+      display: block;
+      text-align: right;
+    }
+
+
+    /* ══════════════════════════════════════
+       HERO — SPLIT
+    ══════════════════════════════════════ */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 68px);
+    }
+
+    .hero-left {
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px 80px 72px;
+    }
+
+    /* organic leaf/blob background patterns */
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(ellipse at 60% 40%, rgba(101,163,13,0.18) 0%, transparent 70%);
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+      animation: blobFloat 8s ease-in-out infinite alternate;
+    }
+
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -40px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(22,101,52,0.35) 0%, transparent 70%);
+      border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    @keyframes blobFloat {
+      from { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; transform: translate(0, 0) rotate(0deg); }
+      to   { border-radius: 40% 60% 30% 70% / 60% 40% 50% 60%; transform: translate(10px, -15px) rotate(3deg); }
+    }
+
+    /* topographic line overlay */
+    .hero-topo {
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+      background-image:
+        repeating-radial-gradient(
+          ellipse at 30% 60%,
+          transparent 0,
+          transparent 28px,
+          rgba(101,163,13,0.8) 29px,
+          transparent 30px
+        ),
+        repeating-radial-gradient(
+          ellipse at 70% 30%,
+          transparent 0,
+          transparent 40px,
+          rgba(101,163,13,0.6) 41px,
+          transparent 42px
+        );
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(101,163,13,0.2);
+      border: 1px solid rgba(101,163,13,0.4);
+      color: #a3e635;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+    }
+
+    .hero-headline {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: #FAFAF7;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: #a3e635;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #b8d4b8;
+      margin-bottom: 40px;
+      max-width: 400px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+    }
+
+    .btn-lime {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      background: var(--lime);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 6px;
+      letter-spacing: 0.2px;
+      border: 2px solid var(--lime);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-lime:hover { background: #4d7c0a; border-color: #4d7c0a; transform: translateY(-1px); }
+
+    .btn-outline-white {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      background: transparent;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 6px;
+      letter-spacing: 0.2px;
+      border: 2px solid rgba(255,255,255,0.45);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: white;
+    }
+
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #a3e635;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .trust-badge .check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(101,163,13,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* green diagonal overlay on hero image edge */
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(26,46,26,0.25) 0%, transparent 40%);
+      z-index: 1;
+    }
+
+
+    /* ══════════════════════════════════════
+       SERVICES
+    ══════════════════════════════════════ */
+    .services {
+      background: var(--offwhite);
+      padding: 100px 72px;
+    }
+
+    .section-eyebrow {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 12px;
+    }
+
+    .section-heading {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--stone);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 56px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 12px;
+      padding: 36px 28px;
+      border-top: 4px solid var(--forest);
+      box-shadow: 0 2px 12px rgba(22,101,52,0.06);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      right: -30px;
+      width: 90px;
+      height: 90px;
+      background: radial-gradient(circle, rgba(101,163,13,0.07) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(22,101,52,0.14);
+    }
+
+    .service-icon {
+      font-size: 2.6rem;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .service-name {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--stone);
+      line-height: 1.6;
+    }
+
+
+    /* ══════════════════════════════════════
+       GALLERY / OUR WORK
+    ══════════════════════════════════════ */
+    .gallery {
+      background: var(--dark);
+      padding: 100px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle diagonal stripe texture */
+    .gallery::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 24px,
+        rgba(255,255,255,0.015) 24px,
+        rgba(255,255,255,0.015) 25px
+      );
+      pointer-events: none;
+    }
+
+    .gallery .section-heading { color: white; }
+    .gallery .section-eyebrow { color: #a3e635; }
+    .gallery .section-sub { color: #8faa8f; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-card {
+      background: #243624;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(101,163,13,0.15);
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(101,163,13,0.45);
+    }
+
+    .project-img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .project-card:hover .project-img { transform: scale(1.04); }
+
+    .project-img-wrap { overflow: hidden; }
+
+    .project-info {
+      padding: 24px 24px 28px;
+    }
+
+    .project-name {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #e8f5e8;
+      margin-bottom: 4px;
+    }
+
+    .project-location {
+      font-size: 0.82rem;
+      color: #6b9e6b;
+      margin-bottom: 16px;
+    }
+
+    .project-link {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: #a3e635;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s;
+    }
+
+    .project-card:hover .project-link { gap: 8px; }
+
+
+    /* ══════════════════════════════════════
+       WHY CHOOSE US
+    ══════════════════════════════════════ */
+    .why {
+      background: var(--warm-bg);
+      padding: 100px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* blob decoration */
+    .why::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -60px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(ellipse, rgba(101,163,13,0.08) 0%, transparent 65%);
+      border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+      pointer-events: none;
+    }
+
+    .why-features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .why-item {
+      padding: 28px 0;
+      border-top: 2px solid #ddd8d0;
+    }
+
+    .why-num {
+      font-family: 'Raleway', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--lime);
+      opacity: 0.6;
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+    }
+
+    .why-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .why-desc {
+      font-size: 0.88rem;
+      color: var(--stone);
+      line-height: 1.65;
+    }
+
+
+    /* ══════════════════════════════════════
+       TESTIMONIALS
+    ══════════════════════════════════════ */
+    .testimonials {
+      background: var(--forest);
+      padding: 100px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* large faint leaf shape in bg */
+    .testimonials::after {
+      content: '🌿';
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-20deg);
+      font-size: 18rem;
+      opacity: 0.04;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .testimonials .section-heading { color: white; }
+    .testimonials .section-eyebrow { color: #a3e635; }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testi-card {
+      background: white;
+      border-radius: 16px;
+      padding: 36px 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      position: relative;
+    }
+
+    .testi-card::before {
+      content: '"';
+      position: absolute;
+      top: 18px;
+      left: 28px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--lime);
+      opacity: 0.15;
+      line-height: 1;
+    }
+
+    .testi-stars {
+      color: #f59e0b;
+      font-size: 1rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .testi-quote {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: #374151;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testi-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--lime), var(--forest));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .testi-name {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--dark);
+    }
+
+    .testi-location {
+      font-size: 0.78rem;
+      color: var(--stone);
+    }
+
+
+    /* ══════════════════════════════════════
+       CTA BANNER
+    ══════════════════════════════════════ */
+    .cta-banner {
+      position: relative;
+      overflow: hidden;
+      min-height: 340px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .cta-left {
+      background: var(--lime);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 72px 56px 72px 72px;
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+      z-index: 2;
+    }
+
+    .cta-right {
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 72px 72px 72px 80px;
+      position: relative;
+    }
+
+    /* leaf SVG decoration */
+    .cta-leaf {
+      position: absolute;
+      top: 50%;
+      right: 24px;
+      transform: translateY(-50%) rotate(25deg);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .cta-left-eyebrow {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
+    }
+
+    .cta-headline {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      max-width: 340px;
+    }
+
+    .btn-cta {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      background: var(--lime);
+      color: white;
+      padding: 18px 36px;
+      border-radius: 8px;
+      border: 3px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      white-space: nowrap;
+      letter-spacing: 0.2px;
+    }
+
+    .cta-right .btn-cta {
+      background: transparent;
+      border: 3px solid rgba(101,163,13,0.6);
+      color: #a3e635;
+    }
+
+    .cta-right .btn-cta:hover {
+      background: rgba(101,163,13,0.15);
+      border-color: #a3e635;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(101,163,13,0.2);
+    }
+
+    .leaf-svg-deco {
+      position: absolute;
+      bottom: -20px;
+      left: 52%;
+      transform: translateX(-50%) rotate(-10deg);
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    .footer {
+      background: var(--dark);
+      padding: 72px 72px 40px;
+      border-top: 3px solid rgba(101,163,13,0.2);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer-logo {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: #e8f5e8;
+      margin-bottom: 14px;
+    }
+
+    .footer-tagline {
+      font-size: 0.88rem;
+      color: #6b9e6b;
+      line-height: 1.65;
+      max-width: 260px;
+      margin-bottom: 20px;
+    }
+
+    .footer-service-area {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #a3e635;
+      letter-spacing: 0.3px;
+    }
+
+    .footer-col-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #4a7a4a;
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      font-size: 0.88rem;
+      color: #8faa8f;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: #a3e635; }
+
+    .footer-contact-item {
+      font-size: 0.88rem;
+      color: #8faa8f;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .footer-contact-item strong {
+      color: #b8d4b8;
+      font-weight: 600;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: #4a7a4a;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a {
+      font-size: 0.8rem;
+      color: #4a7a4a;
+      transition: color 0.2s;
+    }
+
+    .footer-bottom-links a:hover { color: #6b9e6b; }
+
+
+    /* ══════════════════════════════════════
+       SCROLL REVEAL (minimal JS class)
+    ══════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav class="nav">
+    <div class="nav-logo">🌿 Green Thumb Landscapes</div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Our Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#quote">Free Quote</a></li>
+    </ul>
+    <div class="nav-phone">
+      (512) 555-0192
+      <span>Call for a free estimate</span>
+    </div>
+  </nav>
+
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-topo"></div>
+      <div class="hero-content">
+        <div class="hero-badge">🌱 Austin's #1 Landscaping Crew</div>
+        <h1 class="hero-headline">
+          Your Dream Yard,<br><em>Finally.</em>
+        </h1>
+        <p class="hero-sub">
+          We transform ordinary outdoor spaces into living, breathing sanctuaries you'll never want to leave. Expert crews, eco-friendly methods, and results that turn heads.
+        </p>
+        <div class="hero-ctas">
+          <a href="#quote" class="btn-lime">Get Free Quote</a>
+          <a href="#work" class="btn-outline-white">See Our Work</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-badge">
+            <span class="check">✓</span>
+            Licensed &amp; Insured
+          </div>
+          <div class="trust-badge">
+            <span class="check">✓</span>
+            Free Estimates
+          </div>
+          <div class="trust-badge">
+            <span class="check">✓</span>
+            5-Star Rated
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img
+        src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=80&fit=crop"
+        alt="Beautiful landscaped garden with lush greenery"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+
+  <!-- ══ SERVICES ══ -->
+  <section class="services" id="services">
+    <p class="section-eyebrow reveal">Everything Your Yard Needs</p>
+    <h2 class="section-heading reveal">What We Do</h2>
+    <p class="section-sub reveal">
+      From a quick weekly mow to a full landscape redesign — we've got every corner of your outdoor space covered.
+    </p>
+
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-icon">🌱</span>
+        <div class="service-name">Lawn Care</div>
+        <div class="service-desc">Weekly &amp; bi-weekly mowing, edging, and blowing. Your lawn, always looking its best without you lifting a finger.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-icon">✂️</span>
+        <div class="service-name">Hedge Trimming</div>
+        <div class="service-desc">Precision shaping for all hedge types — boxwood, privet, holly, and everything in between. Crisp lines guaranteed.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <span class="service-icon">🌳</span>
+        <div class="service-name">Tree Services</div>
+        <div class="service-desc">Trimming, hazardous removal, and stump grinding by certified arborists who treat every tree with care.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-icon">💧</span>
+        <div class="service-name">Irrigation</div>
+        <div class="service-desc">Smart sprinkler installation and repair systems that conserve water while keeping every zone thriving.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-icon">🪨</span>
+        <div class="service-name">Hardscaping</div>
+        <div class="service-desc">Patios, walkways, fire pit areas, and retaining walls built to last and designed to impress.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <span class="service-icon">🌸</span>
+        <div class="service-name">Garden Design</div>
+        <div class="service-desc">Custom garden planning and planting tailored to your soil, sunlight, and personal style. Native plants our specialty.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ GALLERY / OUR WORK ══ -->
+  <section class="gallery" id="work">
+    <p class="section-eyebrow reveal">Real Projects, Real Results</p>
+    <h2 class="section-heading reveal">Transformations We're Proud Of</h2>
+    <p class="section-sub reveal" style="margin-bottom: 56px;">
+      Every property tells a story. Here are a few we helped write.
+    </p>
+
+    <div class="gallery-grid">
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-img-wrap">
+          <img class="project-img"
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop"
+            alt="Smith Family Backyard Oasis"
+          />
+        </div>
+        <div class="project-info">
+          <div class="project-name">Smith Family Backyard Oasis</div>
+          <div class="project-location">📍 Austin, TX</div>
+          <a href="#" class="project-link">VIEW PROJECT →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-img-wrap">
+          <img class="project-img"
+            src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=800&q=80&fit=crop"
+            alt="Downtown Office Courtyard"
+          />
+        </div>
+        <div class="project-info">
+          <div class="project-name">Downtown Office Courtyard</div>
+          <div class="project-location">📍 San Antonio, TX</div>
+          <a href="#" class="project-link">VIEW PROJECT →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-img-wrap">
+          <img class="project-img"
+            src="https://images.unsplash.com/photo-1585320806297-9794b3e4bbe0?w=800&q=80&fit=crop"
+            alt="Henderson Estate Gardens"
+          />
+        </div>
+        <div class="project-info">
+          <div class="project-name">Henderson Estate Gardens</div>
+          <div class="project-location">📍 Dripping Springs, TX</div>
+          <a href="#" class="project-link">VIEW PROJECT →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ WHY CHOOSE US ══ -->
+  <section class="why" id="about">
+    <p class="section-eyebrow reveal">Why Green Thumb</p>
+    <h2 class="section-heading reveal">The Green Thumb Difference</h2>
+    <p class="section-sub reveal">
+      We're not the cheapest quote in town — we're the best decision you'll make for your property.
+    </p>
+
+    <div class="why-features">
+      <div class="why-item reveal reveal-delay-1">
+        <div class="why-num">01</div>
+        <div class="why-title">20+ Years of Experience</div>
+        <div class="why-desc">Two decades of Austin-area landscapes means we know the soil, climate, and plants that thrive here — not just textbook theory.</div>
+      </div>
+      <div class="why-item reveal reveal-delay-2">
+        <div class="why-num">02</div>
+        <div class="why-title">Eco-Friendly Practices</div>
+        <div class="why-desc">Native plants, water-smart irrigation, and organic fertilizers. Great yards shouldn't cost the planet.</div>
+      </div>
+      <div class="why-item reveal reveal-delay-3">
+        <div class="why-num">03</div>
+        <div class="why-title">Satisfaction Guaranteed</div>
+        <div class="why-desc">Not happy with the result? We come back and make it right. No arguments, no invoices for do-overs.</div>
+      </div>
+      <div class="why-item reveal reveal-delay-4">
+        <div class="why-num">04</div>
+        <div class="why-title">Year-Round Service</div>
+        <div class="why-desc">From spring planting to fall clean-up and winter prep — one crew handles your property through every season.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ TESTIMONIALS ══ -->
+  <section class="testimonials">
+    <p class="section-eyebrow reveal">Happy Homeowners</p>
+    <h2 class="section-heading reveal" style="margin-bottom: 52px;">What Our Neighbors Say</h2>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Green Thumb completely transformed our backyard. We use it every single day now — something we never did before. Worth every penny."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SM</div>
+          <div>
+            <div class="testi-name">Sarah M.</div>
+            <div class="testi-location">Cedar Park, TX</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Professional, on time, and the results speak for themselves. They showed up when they said they would and the yard looks incredible. Highly recommend!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MD</div>
+          <div>
+            <div class="testi-name">Mike D.</div>
+            <div class="testi-location">Round Rock, TX</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"They designed our entire front yard from scratch. Neighbors constantly ask who did it — I hand out their number at least once a week!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">LK</div>
+          <div>
+            <div class="testi-name">Lisa K.</div>
+            <div class="testi-location">Georgetown, TX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ CTA BANNER ══ -->
+  <section class="cta-banner" id="quote">
+    <div class="cta-left">
+      <div class="cta-left-eyebrow">🌿 Let's Get Started</div>
+      <h2 class="cta-headline">Ready to Transform Your Outdoor Space?</h2>
+
+      <!-- Leaf SVG deco on left panel -->
+      <svg class="cta-leaf" width="120" height="160" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 10 C100 10, 115 50, 110 90 C105 130, 70 155, 60 155 C50 155, 15 130, 10 90 C5 50, 20 10, 60 10Z" fill="white"/>
+        <line x1="60" y1="10" x2="60" y2="155" stroke="rgba(0,80,0,0.3)" stroke-width="2"/>
+        <line x1="60" y1="50" x2="90" y2="75" stroke="rgba(0,80,0,0.2)" stroke-width="1.5"/>
+        <line x1="60" y1="70" x2="30" y2="90" stroke="rgba(0,80,0,0.2)" stroke-width="1.5"/>
+        <line x1="60" y1="90" x2="95" y2="110" stroke="rgba(0,80,0,0.2)" stroke-width="1.5"/>
+        <line x1="60" y1="110" x2="28" y2="125" stroke="rgba(0,80,0,0.2)" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <div class="cta-right">
+      <!-- large leaf SVG behind text -->
+      <svg class="leaf-svg-deco" width="320" height="420" viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M160 20 C280 20, 310 130, 300 230 C290 330, 200 405, 160 410 C120 405, 30 330, 20 230 C10 130, 40 20, 160 20Z" fill="#65A30D"/>
+        <line x1="160" y1="20" x2="160" y2="410" stroke="white" stroke-width="3"/>
+        <line x1="160" y1="120" x2="250" y2="185" stroke="white" stroke-width="2"/>
+        <line x1="160" y1="175" x2="70" y2="235" stroke="white" stroke-width="2"/>
+        <line x1="160" y1="230" x2="265" y2="285" stroke="white" stroke-width="2"/>
+        <line x1="160" y1="285" x2="65" y2="330" stroke="white" stroke-width="2"/>
+      </svg>
+
+      <a href="#" class="btn-cta">Schedule Free Consultation</a>
+    </div>
+  </section>
+
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">🌿 Green Thumb Landscapes</div>
+        <p class="footer-tagline">
+          Crafting beautiful, sustainable outdoor spaces across the Austin metro — one yard at a time.
+        </p>
+        <div class="footer-service-area">📍 Serving Austin &amp; Surrounding Areas</div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">Lawn Care</a></li>
+          <li><a href="#">Hedge Trimming</a></li>
+          <li><a href="#">Tree Services</a></li>
+          <li><a href="#">Irrigation</a></li>
+          <li><a href="#">Hardscaping</a></li>
+          <li><a href="#">Garden Design</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Work</a></li>
+          <li><a href="#">Testimonials</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Get in Touch</div>
+        <div class="footer-contact-item">
+          📞 <span><strong>(512) 555-0192</strong><br>Mon–Sat, 7am–6pm</span>
+        </div>
+        <div class="footer-contact-item">
+          ✉️ <span><strong>hello@greenthumbatx.com</strong></span>
+        </div>
+        <div class="footer-contact-item">
+          📍 <span>Austin, TX &amp; Surrounding Areas<br>Cedar Park · Round Rock · Georgetown<br>Pflugerville · Dripping Springs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Green Thumb Landscapes LLC. All rights reserved.</div>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ══ Minimal JS: scroll reveal ══ -->
+  <script>
+    (function () {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
+
+</body>
+</html>
