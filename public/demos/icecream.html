@@ -4,296 +4,356 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Scoops & Dreams — Ice Cream Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&display=swap');
-
-    /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:    #FF6B9D;
+      --purple:  #C084FC;
+      --teal:    #2DD4BF;
+      --yellow:  #FDE68A;
+      --orange:  #FF8C69;
+      --indigo:  #818CF8;
+      --dark:    #2d2d2d;
+      --gray:    #666;
+      --white:   #ffffff;
+      --cream:   #FEF9C3;
+    }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Nunito', sans-serif;
-      background: #fff;
-      color: #2d2d2d;
+      background: var(--white);
+      color: var(--dark);
       overflow-x: hidden;
     }
 
-    /* ===== SPRINKLE PATTERN ===== */
-    .sprinkles {
+    /* ── SPRINKLES ── */
+    #sprinkles {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      inset: 0;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
     }
 
-    .sprinkle {
+    .sp {
       position: absolute;
       border-radius: 50px;
-      opacity: 0.18;
-      animation: floatSprinkle linear infinite;
+      animation: sp-float linear infinite;
     }
 
-    @keyframes floatSprinkle {
-      0%   { transform: translateY(0) rotate(0deg); opacity: 0.18; }
-      50%  { opacity: 0.28; }
-      100% { transform: translateY(-30px) rotate(360deg); opacity: 0.18; }
+    @keyframes sp-float {
+      0%   { transform: translateY(0) rotate(0deg);   opacity: inherit; }
+      50%  { opacity: calc(inherit * 1.4); }
+      100% { transform: translateY(-28px) rotate(360deg); opacity: inherit; }
     }
 
-    /* ===== ANIMATIONS ===== */
-    @keyframes floatCone {
-      0%   { transform: translateY(0px) rotate(-3deg); }
-      50%  { transform: translateY(-22px) rotate(3deg); }
-      100% { transform: translateY(0px) rotate(-3deg); }
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
+    .reveal.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.05); }
-    }
-
-    @keyframes shimmer {
-      0%   { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-
-    /* ===== STICKY NAV ===== */
+    /* ── NAV ── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 20px rgba(255,107,157,0.15);
-      padding: 0 2.5rem;
-      height: 70px;
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 0 48px;
+      border-bottom: 1px solid rgba(255,107,157,0.15);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
     }
 
     .nav-logo {
-      font-family: 'Pacifico', cursive;
-      font-size: 1.6rem;
-      background: linear-gradient(90deg, #FF6B9D, #C084FC, #2DD4BF);
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      white-space: nowrap;
+      text-decoration: none;
+      letter-spacing: -0.01em;
     }
 
     .nav-links {
-      display: flex;
       list-style: none;
-      gap: 2rem;
+      display: flex;
+      gap: 36px;
     }
 
     .nav-links a {
-      text-decoration: none;
+      font-size: 0.88rem;
       font-weight: 700;
-      font-size: 1rem;
-      color: #444;
-      padding-bottom: 3px;
-      border-bottom: 3px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
     }
 
-    .nav-links a:hover {
-      color: #FF6B9D;
-      border-bottom-color: #FF6B9D;
+    .nav-links a:hover { color: var(--pink); }
+
+    .nav-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--white);
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      padding: 6px 16px;
+      border-radius: 999px;
+      box-shadow: 0 4px 14px rgba(255,107,157,0.35);
     }
 
-    /* ===== HERO ===== */
-    #home {
-      position: relative;
+    /* ── HERO ── */
+    #hero {
       min-height: 100vh;
-      background: linear-gradient(135deg, #FF6B9D 0%, #C084FC 40%, #2DD4BF 100%);
-      display: flex;
-      align-items: center;
+      padding-top: 64px;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 50%, var(--teal) 100%);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
       overflow: hidden;
     }
 
-    .hero-bg-blobs {
+    #hero::before {
+      content: '';
       position: absolute;
-      inset: 0;
+      top: -120px; left: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
       pointer-events: none;
     }
 
-    .blob {
+    #hero::after {
+      content: '';
       position: absolute;
+      bottom: -80px; right: -80px;
+      width: 400px; height: 400px;
       border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.35;
+      background: rgba(255,255,255,0.06);
+      pointer-events: none;
     }
 
-    .blob-1 { width: 500px; height: 500px; background: #FDE68A; top: -100px; left: -100px; }
-    .blob-2 { width: 400px; height: 400px; background: #FF8C69; bottom: -80px; left: 30%; }
-    .blob-3 { width: 350px; height: 350px; background: #C084FC; top: 10%; right: -50px; }
-
-    .hero-content {
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 56px 80px 80px;
       position: relative;
       z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 6rem 3rem 4rem;
-      gap: 3rem;
     }
 
-    .hero-text {
-      flex: 1;
-      animation: fadeInUp 0.8s ease both;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.25);
-      backdrop-filter: blur(10px);
-      color: #fff;
+    .hero-eyebrow {
+      font-size: 0.75rem;
       font-weight: 800;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      padding: 0.4rem 1.2rem;
-      border-radius: 999px;
-      margin-bottom: 1.2rem;
-      border: 1.5px solid rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 28px;
     }
 
-    .hero-title {
-      font-family: 'Pacifico', cursive;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      color: #fff;
-      line-height: 1.15;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      margin-bottom: 1.2rem;
+    .hero-hed {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 5.5vw, 6rem);
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .hero-hed-accent {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(3rem, 5.5vw, 6rem);
+      line-height: 1.05;
+      color: var(--yellow);
+      display: block;
+      margin-bottom: 28px;
     }
 
     .hero-sub {
-      font-size: 1.2rem;
-      color: rgba(255,255,255,0.92);
-      max-width: 480px;
-      line-height: 1.7;
+      font-size: 1.05rem;
       font-weight: 600;
-      margin-bottom: 2.2rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 40px;
     }
 
     .hero-btns {
       display: flex;
-      gap: 1rem;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
-    .btn-primary {
-      background: #fff;
-      color: #FF6B9D;
-      font-family: 'Nunito', sans-serif;
+    .btn-white {
+      font-size: 0.95rem;
       font-weight: 800;
-      font-size: 1rem;
-      padding: 0.85rem 2rem;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
+      background: var(--white);
+      color: var(--pink);
       text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+      padding: 13px 32px;
+      border-radius: 999px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.18);
       transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,0,0,0.2); }
-
-    .btn-outline {
-      background: transparent;
-      color: #fff;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 0.85rem 2rem;
-      border-radius: 999px;
-      border: 2.5px solid rgba(255,255,255,0.8);
-      cursor: pointer;
-      text-decoration: none;
       display: inline-block;
-      transition: background 0.2s, transform 0.2s;
     }
 
-    .btn-outline:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+    .btn-white:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.22); }
 
-    .hero-image {
-      flex: 0 0 420px;
+    .btn-outline-white {
+      font-size: 0.95rem;
+      font-weight: 800;
+      background: transparent;
+      color: var(--white);
+      text-decoration: none;
+      padding: 13px 32px;
+      border-radius: 999px;
+      border: 2.5px solid rgba(255,255,255,0.7);
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-outline-white:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); }
+
+    .hero-right {
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: fadeInUp 0.8s 0.2s ease both;
+      padding: 60px 80px 60px 40px;
+      position: relative;
+      z-index: 2;
     }
 
-    .hero-image img {
-      width: 380px;
-      height: 480px;
-      object-fit: cover;
-      border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
-      border: 6px solid rgba(255,255,255,0.5);
-      animation: floatCone 4s ease-in-out infinite;
+    .hero-circle-wrap {
+      position: relative;
+      width: clamp(260px, 30vw, 440px);
+      height: clamp(260px, 30vw, 440px);
     }
 
-    /* ===== WAVY DIVIDER ===== */
-    .wave-divider {
-      display: block;
+    .hero-circle-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -16px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+    }
+
+    .hero-circle-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -34px;
+      border: 2px dashed rgba(255,255,255,0.15);
+      border-radius: 50%;
+      animation: slow-spin 22s linear infinite;
+    }
+
+    @keyframes slow-spin { to { transform: rotate(360deg); } }
+
+    .hero-circle {
       width: 100%;
+      height: 100%;
+      border-radius: 50%;
       overflow: hidden;
-      line-height: 0;
-      margin-top: -2px;
+      border: 5px solid rgba(255,255,255,0.45);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.22);
     }
 
-    .wave-divider svg { display: block; width: 100%; }
-
-    /* ===== SECTION BASE ===== */
-    section { position: relative; z-index: 1; }
-
-    .section-title {
-      font-family: 'Pacifico', cursive;
-      text-align: center;
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 1rem;
+    .hero-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      animation: float-img 4.5s ease-in-out infinite;
     }
 
-    .section-sub {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #666;
-      font-weight: 600;
-      margin-bottom: 3rem;
+    @keyframes float-img {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-14px); }
     }
 
-    /* ===== TODAY'S SPECIALS ===== */
+    /* ── MARQUEE ── */
+    .marquee-strip {
+      background: var(--white);
+      border-top: 1px solid rgba(255,107,157,0.18);
+      border-bottom: 1px solid rgba(255,107,157,0.18);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      align-items: center;
+      animation: marquee-go 28s linear infinite;
+    }
+
+    .marquee-track span {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      padding: 0 20px;
+    }
+
+    .marquee-track .m-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    @keyframes marquee-go {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── SPECIALS ── */
     #specials {
-      background: #FEF9C3;
-      padding: 5rem 2rem;
+      background: var(--cream);
+      padding: 100px 80px;
+      position: relative;
+      z-index: 1;
     }
 
-    #specials .section-title {
-      background: linear-gradient(90deg, #FF6B9D, #C084FC);
+    .section-hed-gradient {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      background: linear-gradient(90deg, var(--pink), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 52px;
     }
 
     .specials-grid {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -301,10 +361,8 @@
     .special-card {
       border-radius: 28px;
       padding: 2.5rem 2rem;
-      text-align: center;
-      flex: 1 1 280px;
-      max-width: 320px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+      color: var(--white);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
       transition: transform 0.25s, box-shadow 0.25s;
       position: relative;
       overflow: hidden;
@@ -314,245 +372,336 @@
       content: '';
       position: absolute;
       top: -40px; right: -40px;
-      width: 120px; height: 120px;
+      width: 140px; height: 140px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.12);
+      pointer-events: none;
     }
 
-    .special-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
-    }
+    .special-card:hover { transform: translateY(-8px); box-shadow: 0 22px 60px rgba(0,0,0,0.18); }
 
-    .special-card:nth-child(1) { background: linear-gradient(135deg, #FF6B9D, #FF8C69); }
-    .special-card:nth-child(2) { background: linear-gradient(135deg, #C084FC, #818CF8); }
-    .special-card:nth-child(3) { background: linear-gradient(135deg, #2DD4BF, #38BDF8); }
+    .special-card:nth-child(1) { background: linear-gradient(135deg, var(--pink), var(--orange)); }
+    .special-card:nth-child(2) { background: linear-gradient(135deg, var(--purple), var(--indigo)); }
+    .special-card:nth-child(3) { background: linear-gradient(135deg, var(--teal), var(--indigo)); }
 
     .special-img-wrap {
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
-      margin: 0 auto 1.5rem;
       overflow: hidden;
-      border: 5px solid rgba(255,255,255,0.5);
+      border: 4px solid rgba(255,255,255,0.45);
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      margin: 0 auto 1.4rem;
     }
 
-    .special-img-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
+    .special-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .special-name {
-      font-family: 'Pacifico', cursive;
-      color: #fff;
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 8px;
     }
 
     .special-desc {
-      color: rgba(255,255,255,0.9);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 1.2rem;
+      font-size: 0.9rem;
       font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 18px;
     }
 
     .special-price {
-      display: inline-block;
-      background: rgba(255,255,255,0.3);
-      backdrop-filter: blur(5px);
-      color: #fff;
-      font-weight: 800;
+      display: block;
+      text-align: center;
       font-size: 1.3rem;
-      padding: 0.4rem 1.4rem;
+      font-weight: 800;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(4px);
+      border: 2px solid rgba(255,255,255,0.4);
       border-radius: 999px;
-      border: 2px solid rgba(255,255,255,0.5);
+      padding: 6px 24px;
+      width: fit-content;
+      margin: 0 auto;
     }
 
-    /* ===== WAVY DIVIDER 2 (yellow to white) ===== */
-    .wave-to-white svg { fill: #fff; }
-    .wave-from-yellow svg { fill: #FEF9C3; }
-
-    /* ===== FLAVORS GRID ===== */
+    /* ── FLAVORS ── */
     #flavors {
-      background: #fff;
-      padding: 5rem 2rem;
+      background: var(--white);
+      padding: 100px 80px;
+      position: relative;
+      z-index: 1;
     }
 
-    #flavors .section-title {
-      background: linear-gradient(90deg, #C084FC, #2DD4BF);
+    .flavors-hed {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      background: linear-gradient(90deg, var(--purple), var(--teal));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      margin-bottom: 8px;
     }
 
     .flavors-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.8rem;
+      gap: 24px;
       max-width: 1100px;
       margin: 0 auto;
+      margin-top: 52px;
     }
 
     .flavor-card {
-      background: #fff;
+      background: var(--white);
       border-radius: 24px;
       padding: 2rem 1.5rem;
       text-align: center;
-      box-shadow: 0 4px 25px rgba(0,0,0,0.08);
-      border: 2px solid #f3f3f3;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      border: 2px solid #f0f0f0;
       transition: transform 0.25s, box-shadow 0.25s;
       position: relative;
       overflow: hidden;
     }
 
-    .flavor-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 16px 50px rgba(0,0,0,0.14);
-    }
+    .flavor-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.13); }
 
     .flavor-dot {
-      width: 80px;
-      height: 80px;
+      width: 88px; height: 88px;
       border-radius: 50%;
       margin: 0 auto 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
-    .flavor-card:nth-child(1) .flavor-dot { background: linear-gradient(135deg, #FDE68A, #FCA5A5); }
-    .flavor-card:nth-child(2) .flavor-dot { background: linear-gradient(135deg, #6B7280, #374151); }
-    .flavor-card:nth-child(3) .flavor-dot { background: linear-gradient(135deg, #FDE68A, #FF8C69); }
-    .flavor-card:nth-child(4) .flavor-dot { background: linear-gradient(135deg, #A7F3D0, #34D399); }
-    .flavor-card:nth-child(5) .flavor-dot { background: linear-gradient(135deg, #FF6B9D, #C084FC); }
-    .flavor-card:nth-child(6) .flavor-dot { background: linear-gradient(135deg, #FDE68A, #D97706); }
+    .flavor-dot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .flavor-num {
+      position: absolute;
+      top: 12px; right: 16px;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: rgba(0,0,0,0.12);
+    }
 
     .flavor-name {
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: #2d2d2d;
-      margin-bottom: 0.6rem;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--dark);
+      margin-bottom: 8px;
     }
 
     .flavor-desc {
-      font-size: 0.88rem;
-      color: #666;
-      line-height: 1.6;
-      margin: 0.5rem 0 0.75rem;
+      font-size: 0.85rem;
       font-weight: 600;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 14px;
     }
 
     .flavor-tags {
       display: flex;
       justify-content: center;
-      gap: 0.4rem;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .tag {
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.25rem 0.75rem;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 10px;
       border-radius: 999px;
       letter-spacing: 0.04em;
     }
 
-    .tag-fav   { background: #FDE68A; color: #92400E; }
-    .tag-seasonal { background: #C084FC; color: #fff; }
-    .tag-new   { background: #2DD4BF; color: #fff; }
-    .tag-classic  { background: #FF8C69; color: #fff; }
-    .tag-vegan { background: #A7F3D0; color: #065F46; }
-    .tag-gf    { background: #FCA5A5; color: #7F1D1D; }
+    .t-fav     { background: var(--yellow);  color: #92400E; }
+    .t-seasonal{ background: var(--purple);  color: #fff; }
+    .t-new     { background: var(--teal);    color: #fff; }
+    .t-classic { background: var(--orange);  color: #fff; }
+    .t-vegan   { background: #A7F3D0;        color: #065F46; }
+    .t-gf      { background: #FCA5A5;        color: #7F1D1D; }
 
-    /* ===== ABOUT ===== */
+    /* ── ABOUT ── */
     #about {
-      padding: 5rem 2rem;
+      padding: 100px 80px;
       background: linear-gradient(135deg, #FFF0F7 0%, #F3E8FF 50%, #E0FDF4 100%);
+      position: relative;
+      z-index: 1;
     }
 
-    .about-inner {
-      display: flex;
-      align-items: center;
-      gap: 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      flex-wrap: wrap;
-    }
-
-    .about-illustration {
-      flex: 0 0 380px;
-      height: 420px;
-      border-radius: 40px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(192,132,252,0.35);
-    }
-
-    .about-text { flex: 1; min-width: 280px; }
-
-    .about-text h2 {
-      font-family: 'Pacifico', cursive;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      background: linear-gradient(90deg, #FF6B9D, #C084FC);
+    .about-pullquote {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      background: linear-gradient(90deg, var(--pink), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 1.2rem;
-      line-height: 1.25;
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 72px;
+      line-height: 1.35;
+    }
+
+    .about-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      border-radius: 32px;
+      box-shadow: 0 20px 60px rgba(192,132,252,0.28);
+    }
+
+    .about-text h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      line-height: 1.2;
     }
 
     .about-text p {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: #555;
+      font-size: 1rem;
       font-weight: 600;
-      margin-bottom: 2rem;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 16px;
     }
 
-    .stats {
+    .stats-row {
       display: flex;
-      gap: 1.5rem;
+      gap: 16px;
+      margin-top: 40px;
       flex-wrap: wrap;
     }
 
-    .stat {
-      background: #fff;
+    .stat-item {
+      background: var(--white);
       border-radius: 20px;
-      padding: 1.2rem 1.5rem;
+      padding: 1.2rem 1.4rem;
       text-align: center;
       box-shadow: 0 4px 20px rgba(0,0,0,0.07);
       flex: 1;
-      min-width: 100px;
+      min-width: 90px;
       transition: transform 0.2s;
     }
 
-    .stat:hover { transform: translateY(-4px); }
+    .stat-item:hover { transform: translateY(-4px); }
 
     .stat-num {
-      font-family: 'Pacifico', cursive;
-      font-size: 1.8rem;
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 4px;
     }
 
-    .stat:nth-child(1) .stat-num { color: #FF6B9D; }
-    .stat:nth-child(2) .stat-num { color: #C084FC; }
-    .stat:nth-child(3) .stat-num { color: #2DD4BF; }
+    .stat-item:nth-child(1) .stat-num { color: var(--pink); }
+    .stat-item:nth-child(2) .stat-num { color: var(--purple); }
+    .stat-item:nth-child(3) .stat-num { color: var(--teal); }
 
     .stat-label {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #888;
-      margin-top: 0.3rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: #aaa;
     }
 
-    /* ===== VISIT US ===== */
-    #visit {
-      padding: 6rem 2rem;
-      background: linear-gradient(135deg, #2DD4BF 0%, #C084FC 100%);
+    /* ── TESTIMONIALS ── */
+    #testimonials {
+      background: var(--cream);
+      padding: 100px 80px;
       position: relative;
+      z-index: 1;
+    }
+
+    .test-hed {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 52px auto 0;
+    }
+
+    .test-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      border: 2px solid #f0f0f0;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .test-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.13); }
+
+    .test-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 14px;
+    }
+
+    .test-card:nth-child(1) .star { color: var(--pink); }
+    .test-card:nth-child(2) .star { color: var(--purple); }
+    .test-card:nth-child(3) .star { color: var(--teal); }
+
+    .star { font-size: 1rem; }
+
+    .test-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .test-author {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .test-loc {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #bbb;
+      margin-top: 3px;
+    }
+
+    /* ── VISIT ── */
+    #visit {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--purple) 100%);
+      padding: 100px 80px;
+      position: relative;
+      z-index: 1;
       overflow: hidden;
     }
 
@@ -562,7 +711,7 @@
       top: -100px; left: -100px;
       width: 400px; height: 400px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.06);
     }
 
     #visit::after {
@@ -571,71 +720,82 @@
       bottom: -80px; right: -80px;
       width: 350px; height: 350px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.05);
     }
 
-    #visit .section-title { color: #fff; }
-    #visit .section-sub   { color: rgba(255,255,255,0.85); }
+    .visit-hed {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: var(--white);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .visit-sub {
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 56px;
+      text-align: center;
+    }
 
     .visit-inner {
-      display: flex;
-      gap: 3rem;
-      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 1000px;
       margin: 0 auto;
-      flex-wrap: wrap;
       position: relative;
       z-index: 1;
     }
 
-    .visit-info {
-      flex: 1;
-      min-width: 280px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(12px);
+    .visit-panel {
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,255,255,0.28);
       border-radius: 28px;
-      padding: 2.5rem;
-      border: 1.5px solid rgba(255,255,255,0.3);
+      padding: 2.4rem;
     }
 
-    .visit-info h3 {
-      font-family: 'Pacifico', cursive;
-      color: #fff;
-      font-size: 1.4rem;
-      margin-bottom: 1.2rem;
+    .visit-panel h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 20px;
     }
 
     .hours-table { width: 100%; border-collapse: collapse; }
 
     .hours-table tr td {
-      padding: 0.5rem 0;
-      color: rgba(255,255,255,0.92);
+      font-size: 0.92rem;
       font-weight: 600;
-      font-size: 0.95rem;
+      color: rgba(255,255,255,0.88);
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
     }
+
+    .hours-table tr:last-child td { border-bottom: none; }
 
     .hours-table tr td:last-child {
       text-align: right;
-      color: #FDE68A;
+      color: var(--yellow);
       font-weight: 800;
     }
 
-    .hours-table tr:not(:last-child) td {
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .contact-item {
+    .contact-line {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      margin-top: 1.2rem;
-      color: rgba(255,255,255,0.92);
+      gap: 12px;
+      margin-top: 16px;
+      font-size: 0.92rem;
       font-weight: 600;
-      font-size: 0.95rem;
+      color: rgba(255,255,255,0.88);
     }
 
     .contact-icon {
-      width: 38px; height: 38px;
-      background: rgba(255,255,255,0.2);
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.18);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -644,511 +804,360 @@
       flex-shrink: 0;
     }
 
-    .fake-map {
-      flex: 1;
-      min-width: 280px;
-      min-height: 340px;
-      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 30%, #a5f3fc 60%, #99f6e4 100%);
-      border-radius: 28px;
-      border: 4px solid rgba(255,255,255,0.5);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-    }
-
-    /* Grid lines to mimic map */
-    .fake-map::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-
-    .map-roads {
-      position: absolute;
-      inset: 0;
-    }
-
-    .map-road-h {
-      position: absolute;
-      left: 0; right: 0;
-      height: 18px;
-      background: rgba(255,255,255,0.6);
-      border-radius: 4px;
-    }
-
-    .map-road-v {
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 18px;
-      background: rgba(255,255,255,0.6);
-      border-radius: 4px;
-    }
-
-    .map-pin {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -100%);
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-      animation: floatCone 2.5s ease-in-out infinite;
-    }
-
-    .map-label {
-      position: absolute;
-      bottom: 1.2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff;
-      border-radius: 999px;
-      padding: 0.4rem 1.2rem;
-      font-weight: 800;
-      font-size: 0.85rem;
-      color: #C084FC;
-      white-space: nowrap;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    /* ===== FOOTER ===== */
+    /* ── FOOTER ── */
     footer {
       background: #1a1a2e;
-      padding: 3.5rem 2rem 2rem;
+      padding: 56px 80px 36px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .footer-logo {
-      font-family: 'Pacifico', cursive;
-      font-size: 2rem;
-      background: linear-gradient(90deg, #FF6B9D, #C084FC, #2DD4BF);
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--teal));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.75rem;
+      margin-bottom: 8px;
     }
 
     .footer-tagline {
-      color: rgba(255,255,255,0.6);
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      margin-bottom: 2rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 32px;
     }
 
-    .social-icons {
+    .footer-social {
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
+      gap: 14px;
+      margin-bottom: 32px;
     }
 
-    .social-icon {
-      width: 48px; height: 48px;
+    .social-btn {
+      width: 46px; height: 46px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 1rem;
-      color: #fff;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+      font-size: 0.9rem;
+      color: var(--white);
       cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .social-icon:hover {
-      transform: translateY(-4px) scale(1.1);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    }
-
-    .social-f { background: linear-gradient(135deg, #FF6B9D, #C084FC); }
-    .social-i { background: linear-gradient(135deg, #FF8C69, #FF6B9D); }
-    .social-t { background: linear-gradient(135deg, #2DD4BF, #C084FC); }
-
-    .footer-copy {
-      color: rgba(255,255,255,0.3);
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
+    .social-btn:hover { transform: translateY(-4px) scale(1.1); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .social-f { background: linear-gradient(135deg, var(--pink), var(--purple)); }
+    .social-i { background: linear-gradient(135deg, var(--orange), var(--pink)); }
+    .social-t { background: linear-gradient(135deg, var(--teal), var(--purple)); }
 
     .footer-divider {
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, #FF6B9D, #C084FC);
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
       border-radius: 999px;
-      margin: 1.5rem auto;
+      margin: 0 auto 20px;
     }
 
-    /* ===== RESPONSIVE ===== */
+    .footer-copy {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.22);
+    }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .hero-content { flex-direction: column; text-align: center; padding: 5rem 1.5rem 3rem; }
-      .hero-image { flex: none; }
-      .hero-image img { width: 260px; height: 320px; }
-      .hero-sub { margin: 0 auto 2.2rem; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 72px 40px 40px; text-align: center; }
       .hero-btns { justify-content: center; }
-      .about-inner { flex-direction: column; }
-      .about-illustration { flex: none; width: 100%; height: 260px; }
+      .hero-right { padding: 20px 40px 72px; }
+      .specials-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
       .flavors-grid { grid-template-columns: repeat(2, 1fr); }
-      .nav-links { gap: 1rem; }
+      .about-body { grid-template-columns: 1fr; }
+      .about-img { height: 300px; }
+      .test-grid { grid-template-columns: 1fr; max-width: 400px; margin: 52px auto 0; }
+      .visit-inner { grid-template-columns: 1fr; }
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #specials, #flavors, #about, #testimonials, #visit { padding: 72px 32px; }
+      footer { padding: 52px 32px 32px; }
     }
 
     @media (max-width: 600px) {
       .flavors-grid { grid-template-columns: 1fr; }
-      nav { padding: 0 1rem; }
-      .nav-logo { font-size: 1.2rem; }
-      .nav-links { gap: 0.6rem; }
-      .nav-links a { font-size: 0.85rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== SPRINKLE DOTS (decorative, fixed, behind everything) ===== -->
-  <div class="sprinkles" aria-hidden="true" id="sprinkles"></div>
+  <div id="sprinkles" aria-hidden="true"></div>
 
-  <!-- ===== NAV ===== -->
+  <!-- NAV -->
   <nav>
-    <div class="nav-logo">Scoops &amp; Dreams</div>
+    <a href="#" class="nav-logo">Scoops &amp; Dreams</a>
     <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
+      <li><a href="#specials">Specials</a></li>
       <li><a href="#flavors">Flavors</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#visit">Visit Us</a></li>
     </ul>
+    <span class="nav-badge">Open Until 10pm</span>
   </nav>
 
-  <!-- ===== HERO ===== -->
-  <section id="home">
-    <div class="hero-bg-blobs" aria-hidden="true">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
-    </div>
-    <div class="hero-content">
-      <div class="hero-text">
-        <span class="hero-badge">Now Open Daily Until 10pm</span>
-        <h1 class="hero-title">Life's Better<br>With Ice Cream</h1>
-        <p class="hero-sub">
-          Handcrafted scoops made with love, local ingredients, and just a
-          little magic. Come find your new favorite flavor.
-        </p>
-        <div class="hero-btns">
-          <a href="#flavors" class="btn-primary">See Our Flavors</a>
-          <a href="#visit" class="btn-outline">Find Us</a>
-        </div>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Since 2012 &nbsp;&middot;&nbsp; Sugar City, TX &nbsp;&middot;&nbsp; Handcrafted Daily</p>
+      <h1>
+        <span class="hero-hed">Life&rsquo;s Better<br>With</span>
+        <span class="hero-hed-accent">Ice Cream.</span>
+      </h1>
+      <p class="hero-sub">Handcrafted scoops made with love, local ingredients, and just a little magic. Come find your new favorite flavor.</p>
+      <div class="hero-btns">
+        <a href="#flavors" class="btn-white">See Our Flavors</a>
+        <a href="#visit" class="btn-outline-white">Find Us</a>
       </div>
-      <div class="hero-image">
-        <img
-          src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=800&q=80"
-          alt="Colorful ice cream cone"
-          loading="eager"
-        />
+    </div>
+    <div class="hero-right">
+      <div class="hero-circle-wrap">
+        <div class="hero-circle">
+          <img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=800&q=80" alt="Colorful ice cream cone" loading="eager" />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== WAVY DIVIDER: hero → specials ===== -->
-  <div class="wave-divider" style="background: linear-gradient(135deg, #FF6B9D, #C084FC, #2DD4BF);">
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#FEF9C3"
-        d="M0,40 C240,90 480,0 720,45 C960,90 1200,10 1440,50 L1440,90 L0,90 Z" />
-    </svg>
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Hand-Crafted</span><span class="m-dot" style="background:var(--pink)"></span>
+      <span>Small Batch</span><span class="m-dot" style="background:var(--purple)"></span>
+      <span>Local Dairy</span><span class="m-dot" style="background:var(--teal)"></span>
+      <span>Made Daily</span><span class="m-dot" style="background:var(--orange)"></span>
+      <span>Seasonal Flavors</span><span class="m-dot" style="background:var(--indigo)"></span>
+      <span>Est. 2012</span><span class="m-dot" style="background:var(--pink)"></span>
+      <span>Sugar City, TX</span><span class="m-dot" style="background:var(--teal)"></span>
+      <span>Family Owned</span><span class="m-dot" style="background:var(--purple)"></span>
+      <span>Hand-Crafted</span><span class="m-dot" style="background:var(--pink)"></span>
+      <span>Small Batch</span><span class="m-dot" style="background:var(--purple)"></span>
+      <span>Local Dairy</span><span class="m-dot" style="background:var(--teal)"></span>
+      <span>Made Daily</span><span class="m-dot" style="background:var(--orange)"></span>
+      <span>Seasonal Flavors</span><span class="m-dot" style="background:var(--indigo)"></span>
+      <span>Est. 2012</span><span class="m-dot" style="background:var(--pink)"></span>
+      <span>Sugar City, TX</span><span class="m-dot" style="background:var(--teal)"></span>
+      <span>Family Owned</span><span class="m-dot" style="background:var(--purple)"></span>
+    </div>
   </div>
 
-  <!-- ===== TODAY'S SPECIALS ===== -->
+  <!-- TODAY'S SPECIALS -->
   <section id="specials">
-    <h2 class="section-title">Today's Specials</h2>
-    <p class="section-sub">Fresh picks, limited time — grab 'em while you can!</p>
+    <h2 class="section-hed-gradient reveal">Today&rsquo;s Specials</h2>
+    <p class="section-sub reveal d1">Fresh picks, limited time &mdash; grab &rsquo;em while you can!</p>
     <div class="specials-grid">
-
-      <div class="special-card">
+      <div class="special-card reveal">
         <div class="special-img-wrap">
-          <img src="https://images.unsplash.com/photo-1567206563174-369769a30945?w=800&q=80" alt="Strawberry Cloud" />
+          <img src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=800&q=80" alt="Strawberry Cloud" loading="lazy" />
         </div>
         <div class="special-name">Strawberry Cloud</div>
         <p class="special-desc">Fresh strawberries swirled into dreamy vanilla cream with a hint of rosewater.</p>
         <span class="special-price">$4.50</span>
       </div>
-
-      <div class="special-card">
+      <div class="special-card reveal d1">
         <div class="special-img-wrap">
-          <img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=800&q=80" alt="Midnight Blueberry" />
+          <img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=800&q=80" alt="Midnight Blueberry" loading="lazy" />
         </div>
         <div class="special-name">Midnight Blueberry</div>
         <p class="special-desc">Wild blueberry sorbet with dark chocolate ribbons and a sugar-dusted crunch.</p>
         <span class="special-price">$5.00</span>
       </div>
-
-      <div class="special-card">
+      <div class="special-card reveal d2">
         <div class="special-img-wrap">
-          <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800&q=80" alt="Mango Sunrise" />
+          <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800&q=80" alt="Mango Sunrise" loading="lazy" />
         </div>
         <div class="special-name">Mango Sunrise</div>
         <p class="special-desc">Tropical Ataulfo mangoes blended with coconut cream and a zesty lime swirl.</p>
         <span class="special-price">$4.75</span>
       </div>
-
     </div>
   </section>
 
-  <!-- ===== WAVY DIVIDER: specials → flavors ===== -->
-  <div class="wave-divider wave-to-white" style="background: #FEF9C3;">
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#ffffff"
-        d="M0,50 C360,0 720,90 1080,40 C1260,15 1380,60 1440,45 L1440,90 L0,90 Z" />
-    </svg>
-  </div>
-
-  <!-- ===== OUR FLAVORS ===== -->
+  <!-- FLAVORS -->
   <section id="flavors">
-    <h2 class="section-title">Our Flavors</h2>
-    <p class="section-sub">Something for every mood, every craving, every moment.</p>
+    <h2 class="flavors-hed reveal">Something for every mood, every craving.</h2>
+    <p class="section-sub reveal d1">Our Flavors &nbsp;&middot;&nbsp; Made fresh daily</p>
     <div class="flavors-grid">
-
-      <div class="flavor-card">
-        <div class="flavor-dot"></div>
+      <div class="flavor-card reveal">
+        <span class="flavor-num">01</span>
+        <div class="flavor-dot"><img src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=200&q=80" alt="Vanilla Bean Dream" loading="lazy" /></div>
         <div class="flavor-name">Vanilla Bean Dream</div>
         <p class="flavor-desc">Madagascar vanilla bean steeped in fresh cream. Simple, perfect, timeless.</p>
-        <div class="flavor-tags">
-          <span class="tag tag-fav">Fan Favorite</span>
-          <span class="tag tag-gf">GF</span>
-        </div>
+        <div class="flavor-tags"><span class="tag t-fav">Fan Favorite</span><span class="tag t-gf">GF</span></div>
       </div>
-
-      <div class="flavor-card">
-        <div class="flavor-dot"></div>
+      <div class="flavor-card reveal d1">
+        <span class="flavor-num">02</span>
+        <div class="flavor-dot"><img src="https://images.unsplash.com/photo-1564671165093-20688ff1fffa?w=200&q=80" alt="Choco Fudge Swirl" loading="lazy" /></div>
         <div class="flavor-name">Choco Fudge Swirl</div>
-        <p class="flavor-desc">Dark Belgian chocolate base with ribbons of warm fudge folded through every scoop.</p>
-        <div class="flavor-tags">
-          <span class="tag tag-classic">Classic</span>
-          <span class="tag tag-fav">Fan Favorite</span>
-        </div>
+        <p class="flavor-desc">Dark Belgian chocolate with ribbons of warm fudge folded through every scoop.</p>
+        <div class="flavor-tags"><span class="tag t-classic">Classic</span><span class="tag t-fav">Fan Favorite</span></div>
       </div>
-
-      <div class="flavor-card">
-        <div class="flavor-dot"></div>
+      <div class="flavor-card reveal d2">
+        <span class="flavor-num">03</span>
+        <div class="flavor-dot"><img src="https://images.unsplash.com/photo-1557142046-c704a3adf364?w=200&q=80" alt="Birthday Cake Blast" loading="lazy" /></div>
         <div class="flavor-name">Birthday Cake Blast</div>
-        <p class="flavor-desc">Vanilla cake batter ice cream loaded with rainbow sprinkles and frosting swirls.</p>
-        <div class="flavor-tags">
-          <span class="tag tag-new">New</span>
-          <span class="tag tag-seasonal">Party Pick</span>
-        </div>
+        <p class="flavor-desc">Vanilla cake batter loaded with rainbow sprinkles and frosting swirls.</p>
+        <div class="flavor-tags"><span class="tag t-new">New</span><span class="tag t-seasonal">Party Pick</span></div>
       </div>
-
-      <div class="flavor-card">
-        <div class="flavor-dot"></div>
+      <div class="flavor-card reveal">
+        <span class="flavor-num">04</span>
+        <div class="flavor-dot"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&q=80" alt="Matcha Green Tea" loading="lazy" /></div>
         <div class="flavor-name">Matcha Green Tea</div>
-        <p class="flavor-desc">Stone-ground ceremonial matcha from Kyoto, blended into a silky oat milk base.</p>
-        <div class="flavor-tags">
-          <span class="tag tag-seasonal">Seasonal</span>
-          <span class="tag tag-vegan">Vegan</span>
-        </div>
+        <p class="flavor-desc">Stone-ground ceremonial matcha from Kyoto in a silky oat milk base.</p>
+        <div class="flavor-tags"><span class="tag t-seasonal">Seasonal</span><span class="tag t-vegan">Vegan</span></div>
       </div>
-
-      <div class="flavor-card">
-        <div class="flavor-dot"></div>
+      <div class="flavor-card reveal d1">
+        <span class="flavor-num">05</span>
+        <div class="flavor-dot"><img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=200&q=80" alt="Raspberry Ripple" loading="lazy" /></div>
         <div class="flavor-name">Raspberry Ripple</div>
-        <p class="flavor-desc">Tart fresh raspberries swirled into sweet cream — bright, fruity, and gorgeous in the cup.</p>
-        <div class="flavor-tags">
-          <span class="tag tag-fav">Fan Favorite</span>
-          <span class="tag tag-gf">GF</span>
-        </div>
+        <p class="flavor-desc">Tart fresh raspberries swirled into sweet cream — bright, fruity, gorgeous.</p>
+        <div class="flavor-tags"><span class="tag t-fav">Fan Favorite</span><span class="tag t-gf">GF</span></div>
       </div>
-
-      <div class="flavor-card">
-        <div class="flavor-dot"></div>
+      <div class="flavor-card reveal d2">
+        <span class="flavor-num">06</span>
+        <div class="flavor-dot"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=200&q=80" alt="Cookie Dough Crunch" loading="lazy" /></div>
         <div class="flavor-name">Cookie Dough Crunch</div>
         <p class="flavor-desc">Brown butter ice cream packed with chunks of house-made edible cookie dough.</p>
-        <div class="flavor-tags">
-          <span class="tag tag-classic">Classic</span>
-          <span class="tag tag-new">Hot Pick</span>
-        </div>
+        <div class="flavor-tags"><span class="tag t-classic">Classic</span><span class="tag t-new">Hot Pick</span></div>
       </div>
-
     </div>
   </section>
 
-  <!-- ===== WAVY DIVIDER: flavors → about ===== -->
-  <div class="wave-divider" style="background: #ffffff;">
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#FFF0F7"
-        d="M0,30 C320,80 640,0 960,50 C1120,75 1300,20 1440,55 L1440,90 L0,90 Z" />
-    </svg>
-  </div>
-
-  <!-- ===== ABOUT ===== -->
+  <!-- ABOUT -->
   <section id="about">
-    <div class="about-inner">
-      <div class="about-illustration">
-        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&q=80&fit=crop" alt="Inside Scoops &amp; Dreams" style="width:100%;height:100%;object-fit:cover;border-radius:40px;" />
-      </div>
-      <div class="about-text">
-        <h2>We've Been Scooping Since 2012</h2>
-        <p>
-          What started as a tiny cart at the Sugar City Farmers Market grew into
-          the neighborhood's most beloved ice cream destination. We're a family-owned
-          shop run by the Delgado family — Mom handles the flavors, Dad scoops,
-          and the kids are the official taste-testers (tough job, someone's gotta do it).
-        </p>
-        <p>
-          Every batch is made fresh daily using locally sourced dairy, seasonal
-          fruits, and flavor combinations dreamed up right here in our little kitchen.
-          No shortcuts. Just pure, joyful scoops.
-        </p>
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-num">12+</div>
-            <div class="stat-label">Flavors</div>
+    <div class="about-pullquote reveal">
+      &ldquo;What started as a tiny cart at the Farmers Market grew into the neighborhood&rsquo;s most beloved ice cream destination.&rdquo;
+    </div>
+    <div class="about-body">
+      <img class="about-img reveal" src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&q=80&fit=crop" alt="Inside Scoops &amp; Dreams" loading="lazy" />
+      <div class="reveal d1">
+        <h2>We&rsquo;ve Been Scooping Since 2012.</h2>
+        <p>We&rsquo;re a family-owned shop run by the Delgado family &mdash; Mom handles the flavors, Dad scoops, and the kids are the official taste-testers (tough job, someone&rsquo;s gotta do it).</p>
+        <p>Every batch is made fresh daily using locally sourced dairy, seasonal fruits, and flavor combinations dreamed up right here in our little kitchen. No shortcuts. Just pure, joyful scoops.</p>
+        <div class="stats-row">
+          <div class="stat-item">
+            <span class="stat-num">12+</span>
+            <span class="stat-label">Flavors</span>
           </div>
-          <div class="stat">
-            <div class="stat-num">10k+</div>
-            <div class="stat-label">Smiles</div>
+          <div class="stat-item">
+            <span class="stat-num">10k+</span>
+            <span class="stat-label">Smiles</span>
           </div>
-          <div class="stat">
-            <div class="stat-num">1</div>
-            <div class="stat-label">Happy Family</div>
+          <div class="stat-item">
+            <span class="stat-num">1</span>
+            <span class="stat-label">Happy Family</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== WAVY DIVIDER: about → testimonials ===== -->
-  <div class="wave-divider" style="background: linear-gradient(135deg, #FFF0F7, #F3E8FF, #E0FDF4);">
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#FEF9C3" d="M0,30 C320,80 640,0 960,50 C1120,75 1300,20 1440,55 L1440,90 L0,90 Z" />
-    </svg>
-  </div>
-
-  <!-- ===== TESTIMONIALS ===== -->
-  <section id="testimonials" style="background:#FEF9C3; padding: 5rem 2rem;">
-    <h2 class="section-title" style="background: linear-gradient(90deg, #FF6B9D, #C084FC); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">What People Are Saying</h2>
-    <p class="section-sub">Don't take our word for it — take theirs.</p>
-    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:1.5rem; max-width:1100px; margin:0 auto;">
-      <div style="background:#fff; border-radius:24px; padding:2rem; box-shadow:0 4px 25px rgba(0,0,0,0.07); transition: transform 0.25s, box-shadow 0.25s;" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 50px rgba(0,0,0,0.13)'" onmouseleave="this.style.transform='';this.style.boxShadow='0 4px 25px rgba(0,0,0,0.07)'">
-        <div style="display:flex;gap:3px;margin-bottom:1rem;">
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#FF6B9D"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#FF6B9D"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#FF6B9D"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#FF6B9D"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#FF6B9D"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <h2 class="test-hed reveal">What People Are Saying</h2>
+    <p class="section-sub reveal d1">Don&rsquo;t take our word for it &mdash; take theirs.</p>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-stars">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
         </div>
-        <p style="font-size:0.95rem;line-height:1.7;color:#555;font-weight:600;margin-bottom:1.2rem;">"The Cookie Dough Crunch changed my life. I'm not being dramatic. I drive 20 minutes out of my way just to get a cup."</p>
-        <div style="font-weight:800;color:#2d2d2d;font-size:0.9rem;">Jenna R.</div>
-        <div style="font-size:0.8rem;color:#aaa;font-weight:600;">Sugar City, TX</div>
+        <p class="test-text">&ldquo;The Cookie Dough Crunch changed my life. I&rsquo;m not being dramatic. I drive 20 minutes out of my way just to get a cup.&rdquo;</p>
+        <div class="test-author">Jenna R.</div>
+        <div class="test-loc">Sugar City, TX</div>
       </div>
-      <div style="background:#fff; border-radius:24px; padding:2rem; box-shadow:0 4px 25px rgba(0,0,0,0.07); transition: transform 0.25s, box-shadow 0.25s;" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 50px rgba(0,0,0,0.13)'" onmouseleave="this.style.transform='';this.style.boxShadow='0 4px 25px rgba(0,0,0,0.07)'">
-        <div style="display:flex;gap:3px;margin-bottom:1rem;">
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#C084FC"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#C084FC"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#C084FC"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#C084FC"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#C084FC"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+      <div class="test-card reveal d1">
+        <div class="test-stars">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
         </div>
-        <p style="font-size:0.95rem;line-height:1.7;color:#555;font-weight:600;margin-bottom:1.2rem;">"Brought the kids here on a Tuesday and now it's a weekly tradition. The Matcha is surprisingly their favorite — mine too, honestly."</p>
-        <div style="font-weight:800;color:#2d2d2d;font-size:0.9rem;">Marcus T.</div>
-        <div style="font-size:0.8rem;color:#aaa;font-weight:600;">Austin, TX</div>
+        <p class="test-text">&ldquo;Brought the kids here on a Tuesday and now it&rsquo;s a weekly tradition. The Matcha is surprisingly their favorite &mdash; mine too, honestly.&rdquo;</p>
+        <div class="test-author">Marcus T.</div>
+        <div class="test-loc">Austin, TX</div>
       </div>
-      <div style="background:#fff; border-radius:24px; padding:2rem; box-shadow:0 4px 25px rgba(0,0,0,0.07); transition: transform 0.25s, box-shadow 0.25s;" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 50px rgba(0,0,0,0.13)'" onmouseleave="this.style.transform='';this.style.boxShadow='0 4px 25px rgba(0,0,0,0.07)'">
-        <div style="display:flex;gap:3px;margin-bottom:1rem;">
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#2DD4BF"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#2DD4BF"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#2DD4BF"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#2DD4BF"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="#2DD4BF"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+      <div class="test-card reveal d2">
+        <div class="test-stars">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
         </div>
-        <p style="font-size:0.95rem;line-height:1.7;color:#555;font-weight:600;margin-bottom:1.2rem;">"I asked for a recommendation and they spent five minutes talking me through every flavor. That kind of care shows up in the product too."</p>
-        <div style="font-weight:800;color:#2d2d2d;font-size:0.9rem;">Sofia M.</div>
-        <div style="font-size:0.8rem;color:#aaa;font-weight:600;">Round Rock, TX</div>
+        <p class="test-text">&ldquo;I asked for a recommendation and they spent five minutes talking me through every flavor. That kind of care shows up in the product too.&rdquo;</p>
+        <div class="test-author">Sofia M.</div>
+        <div class="test-loc">Round Rock, TX</div>
       </div>
     </div>
   </section>
 
-  <!-- ===== WAVY DIVIDER: testimonials → visit ===== -->
-  <div class="wave-divider" style="background: #FEF9C3;">
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#2DD4BF"
-        d="M0,60 C200,10 400,80 720,40 C960,10 1200,70 1440,30 L1440,90 L0,90 Z" />
-    </svg>
-  </div>
-
-  <!-- ===== VISIT US ===== -->
+  <!-- VISIT -->
   <section id="visit">
-    <h2 class="section-title">Come Visit Us</h2>
-    <p class="section-sub">We're always ready to scoop something special just for you.</p>
+    <h2 class="visit-hed reveal">Come Visit Us</h2>
+    <p class="visit-sub reveal d1">We&rsquo;re always ready to scoop something special just for you.</p>
     <div class="visit-inner">
-
-      <div class="visit-info">
+      <div class="visit-panel reveal">
         <h3>Hours</h3>
         <table class="hours-table">
-          <tr><td>Monday – Thursday</td><td>11am – 9pm</td></tr>
-          <tr><td>Friday</td><td>11am – 10pm</td></tr>
-          <tr><td>Saturday</td><td>10am – 10pm</td></tr>
-          <tr><td>Sunday</td><td>10am – 9pm</td></tr>
+          <tr><td>Monday &ndash; Thursday</td><td>11am &ndash; 9pm</td></tr>
+          <tr><td>Friday</td><td>11am &ndash; 10pm</td></tr>
+          <tr><td>Saturday</td><td>10am &ndash; 10pm</td></tr>
+          <tr><td>Sunday</td><td>10am &ndash; 9pm</td></tr>
         </table>
-        <div class="contact-item">
-          <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
-          <div>123 Sweetland Ave, Sugar City, TX 78201</div>
+      </div>
+      <div class="visit-panel reveal d1">
+        <h3>Find Us</h3>
+        <div class="contact-line">
+          <div class="contact-icon">📍</div>
+          <span>123 Sweetland Ave, Sugar City, TX 78201</span>
         </div>
-        <div class="contact-item">
-          <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
-          <div>(512) 555-SCOOP</div>
+        <div class="contact-line">
+          <div class="contact-icon">📞</div>
+          <span>(512) 555-SCOOP</span>
         </div>
-        <div class="contact-item">
-          <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
-          <div>hello@scoopsanddreams.com</div>
+        <div class="contact-line">
+          <div class="contact-icon">✉️</div>
+          <span>hello@scoopsanddreams.com</span>
         </div>
       </div>
-
-      <!-- Fake map -->
-      <div class="fake-map">
-        <div class="map-roads">
-          <div class="map-road-h" style="top: 35%;"></div>
-          <div class="map-road-h" style="top: 65%;"></div>
-          <div class="map-road-v" style="left: 30%;"></div>
-          <div class="map-road-v" style="left: 60%;"></div>
-        </div>
-        <div class="map-pin">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#FF6B9D" stroke="white" stroke-width="1"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        </div>
-        <div class="map-label">Scoops &amp; Dreams — 123 Sweetland Ave</div>
-      </div>
-
     </div>
   </section>
 
-  <!-- ===== WAVY DIVIDER: visit → footer ===== -->
-  <div class="wave-divider" style="background: linear-gradient(135deg, #2DD4BF, #C084FC);">
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#1a1a2e"
-        d="M0,45 C360,90 720,0 1080,55 C1260,80 1380,30 1440,50 L1440,90 L0,90 Z" />
-    </svg>
-  </div>
-
-  <!-- ===== FOOTER ===== -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Scoops &amp; Dreams</div>
     <p class="footer-tagline">Making the world sweeter, one scoop at a time.</p>
-    <div class="social-icons">
-      <div class="social-icon social-f" title="Facebook">F</div>
-      <div class="social-icon social-i" title="Instagram">I</div>
-      <div class="social-icon social-t" title="Twitter/X">T</div>
+    <div class="footer-social">
+      <div class="social-btn social-f">F</div>
+      <div class="social-btn social-i">I</div>
+      <div class="social-btn social-t">T</div>
     </div>
     <div class="footer-divider"></div>
-    <p class="footer-copy">&copy; 2026 Scoops &amp; Dreams. All rights reserved. Made with love in Sugar City, TX.</p>
+    <p class="footer-copy">&copy; 2026 Scoops &amp; Dreams &nbsp;&middot;&nbsp; All rights reserved &nbsp;&middot;&nbsp; Made with love in Sugar City, TX.</p>
   </footer>
 
-  <!-- ===== SPRINKLE GENERATOR ===== -->
   <script>
+    // IntersectionObserver
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Colorful sprinkles
     (function() {
-      const container = document.getElementById('sprinkles');
       const colors = ['#FF6B9D','#C084FC','#FDE68A','#2DD4BF','#FF8C69','#818CF8','#FCA5A5'];
-      const count = 55;
-      for (let i = 0; i < count; i++) {
+      const c = document.getElementById('sprinkles');
+      for (let i = 0; i < 55; i++) {
         const el = document.createElement('div');
-        el.className = 'sprinkle';
-        const size = Math.random() * 10 + 5;
+        el.className = 'sp';
+        const size = 4 + Math.random() * 10;
         const isBar = Math.random() > 0.5;
         el.style.cssText = `
           width: ${isBar ? size * 3 : size}px;
@@ -1157,14 +1166,13 @@
           left: ${Math.random() * 100}%;
           top: ${Math.random() * 100}%;
           transform: rotate(${Math.random() * 360}deg);
-          animation-duration: ${4 + Math.random() * 6}s;
-          animation-delay: ${Math.random() * -8}s;
-          opacity: ${0.1 + Math.random() * 0.2};
+          opacity: ${0.12 + Math.random() * 0.14};
+          animation-duration: ${5 + Math.random() * 7}s;
+          animation-delay: ${Math.random() * -10}s;
         `;
-        container.appendChild(el);
+        c.appendChild(el);
       }
     })();
   </script>
-
 </body>
 </html>

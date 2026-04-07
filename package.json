@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "npm run build && wrangler dev",
+    "preview": "npm run build && wrangler pages dev dist",
     "astro": "astro",
     "generate-types": "wrangler types",
     "deploy": "npm run build && wrangler deploy"
@@ -22,6 +22,6 @@
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
-    "wrangler": "^4.74.0"
+    "wrangler": "^4.80.0"
   }
 }

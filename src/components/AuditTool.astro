@@ -1,0 +1,245 @@
+---
+const psiKey = import.meta.env.PUBLIC_PAGESPEED_API_KEY ?? '';
+---
+
+<section id="audit" class="py-24 bg-gray-900 border-y border-gray-800">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <p class="text-emerald-400 text-xs font-bold uppercase tracking-widest text-center mb-3">
+      Free Site Audit
+    </p>
+    <h2 class="text-3xl sm:text-4xl font-bold text-white text-center mb-4">
+      See exactly what's holding your website back
+    </h2>
+    <p class="text-gray-400 text-center max-w-xl mx-auto mb-10">
+      Enter your URL and we'll run a real Google performance scan — plus an AI-powered breakdown of what it means for your business.
+    </p>
+
+    <!-- Input -->
+    <div class="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto mb-10">
+      <input
+        id="audit-url"
+        type="text"
+        placeholder="yoursite.com"
+        class="flex-1 bg-gray-950 border border-gray-700 focus:border-emerald-500 text-gray-100 placeholder-gray-600 rounded-lg px-4 py-3 text-sm outline-none transition-colors duration-200"
+      />
+      <button
+        id="audit-btn"
+        class="bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-gray-950 font-bold px-6 py-3 rounded-lg transition-colors duration-200 whitespace-nowrap text-sm"
+      >
+        Analyze My Site
+      </button>
+    </div>
+
+    <!-- Error -->
+    <p id="audit-error" class="hidden text-center text-red-400 text-sm mb-6"></p>
+
+    <!-- Loading -->
+    <div id="audit-loading" class="hidden text-center py-12">
+      <div class="inline-flex items-center gap-3 text-gray-400 text-sm">
+        <svg class="animate-spin h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+        </svg>
+        <span id="audit-loading-msg">Running Google audit — this takes 15–20 seconds…</span>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="audit-results" class="hidden">
+
+      <!-- Score Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        <div class="bg-gray-950 border border-gray-800 rounded-xl p-5 text-center">
+          <div id="score-performance" class="text-4xl font-bold mb-1">—</div>
+          <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold">Performance</div>
+        </div>
+        <div class="bg-gray-950 border border-gray-800 rounded-xl p-5 text-center">
+          <div id="score-seo" class="text-4xl font-bold mb-1">—</div>
+          <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold">SEO</div>
+        </div>
+        <div class="bg-gray-950 border border-gray-800 rounded-xl p-5 text-center">
+          <div id="score-accessibility" class="text-4xl font-bold mb-1">—</div>
+          <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold">Accessibility</div>
+        </div>
+        <div class="bg-gray-950 border border-gray-800 rounded-xl p-5 text-center">
+          <div id="score-best-practices" class="text-4xl font-bold mb-1">—</div>
+          <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold">Best Practices</div>
+        </div>
+      </div>
+
+      <!-- AI Analysis -->
+      <div id="audit-analysis" class="hidden bg-gray-950 border border-gray-800 rounded-xl p-6 mb-8">
+        <p class="text-xs text-emerald-400 uppercase tracking-widest font-semibold mb-4">What this means for your business</p>
+        <div id="audit-analysis-text" class="text-gray-300 text-sm leading-relaxed space-y-2"></div>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center">
+        <p class="text-gray-500 text-sm mb-4">Ready to fix these issues?</p>
+        <a
+          href="#contact"
+          class="inline-block bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-8 py-3.5 rounded-lg transition-colors duration-200 text-sm"
+        >
+          Get a Free Quote
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script define:vars={{ psiKey }}>
+  const urlInput = document.getElementById('audit-url');
+  const btn = document.getElementById('audit-btn');
+  const loading = document.getElementById('audit-loading');
+  const loadingMsg = document.getElementById('audit-loading-msg');
+  const results = document.getElementById('audit-results');
+  const error = document.getElementById('audit-error');
+  const analysisBox = document.getElementById('audit-analysis');
+  const analysisText = document.getElementById('audit-analysis-text');
+
+  function scoreColor(score) {
+    if (score >= 90) return 'text-emerald-400';
+    if (score >= 50) return 'text-yellow-400';
+    return 'text-red-400';
+  }
+
+  function setScore(id, score) {
+    const el = document.getElementById(id);
+    el.textContent = String(score);
+    el.className = `text-4xl font-bold mb-1 ${scoreColor(score)}`;
+  }
+
+  function showError(msg) {
+    error.textContent = msg;
+    error.classList.remove('hidden');
+    loading.classList.add('hidden');
+    btn.disabled = false;
+    btn.textContent = 'Analyze My Site';
+  }
+
+  btn.addEventListener('click', async () => {
+    let url = urlInput.value.trim();
+    if (!url) { showError('Please enter a website URL.'); return; }
+    if (!url.startsWith('http')) url = 'https://' + url;
+
+    error.classList.add('hidden');
+    results.classList.add('hidden');
+    analysisBox.classList.add('hidden');
+    loading.classList.remove('hidden');
+    loadingMsg.textContent = 'Running Google audit — this takes 15–20 seconds…';
+    btn.disabled = true;
+    btn.textContent = 'Analyzing…';
+
+    // Step 1: PSI + homepage crawl in parallel
+    let scores, failingAudits, pageContent;
+    try {
+      const psiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile&category=performance&category=seo&category=accessibility&category=best-practices${psiKey ? `&key=${psiKey}` : ''}`;
+
+      const [psiRes, crawlRes] = await Promise.allSettled([
+        fetch(psiUrl),
+        fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`),
+      ]);
+
+      // Parse crawl content
+      if (crawlRes.status === 'fulfilled' && crawlRes.value.ok) {
+        try {
+          const crawlData = await crawlRes.value.json();
+          const html = crawlData.contents ?? '';
+          const tmp = document.createElement('div');
+          tmp.innerHTML = html;
+          // Remove scripts/styles
+          tmp.querySelectorAll('script,style,noscript').forEach(el => el.remove());
+          const title = tmp.querySelector('title')?.textContent?.trim() ?? '';
+          const metaDesc = tmp.querySelector('meta[name="description"]')?.getAttribute('content')?.trim() ?? '';
+          const h1s = [...tmp.querySelectorAll('h1')].map(h => h.textContent.trim()).filter(Boolean).slice(0, 3);
+          const h2s = [...tmp.querySelectorAll('h2')].map(h => h.textContent.trim()).filter(Boolean).slice(0, 5);
+          const bodyText = (tmp.querySelector('body')?.innerText ?? tmp.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 1500);
+          pageContent = { title, metaDesc, h1s, h2s, bodyText };
+        } catch { /* crawl parse failed, skip */ }
+      }
+
+      const psiResponse = psiRes.status === 'fulfilled' ? psiRes.value : null;
+      const psi = psiResponse ? await psiResponse.json() : {};
+
+      // SSL / unreachable site — turn into a finding
+      if (!psiResponse?.ok || !psi.lighthouseResult?.categories) {
+        const msg = psi?.error?.message ?? '';
+        const isSsl = msg.includes('FAILED_DOCUMENT_REQUEST') || msg.includes('ERR_FAILED') || msg.includes('ERR_CERT');
+        if (isSsl) {
+          loading.classList.add('hidden');
+          analysisText.innerHTML = `
+            <p>• Your site shows a security warning to visitors — browsers flag it as "Not Secure", which drives away customers before they even see your content.</p>
+            <p>• Google penalizes sites without valid HTTPS in search rankings, meaning fewer people find you in the first place.</p>
+            <p>• Many modern browsers now block access to sites with cert issues entirely, cutting off a portion of your potential customers.</p>
+            <p>These are fixable — a modern rebuild includes a proper SSL certificate and clean hosting from day one.</p>`;
+          analysisBox.classList.remove('hidden');
+          results.classList.remove('hidden');
+          btn.disabled = false;
+          btn.textContent = 'Analyze My Site';
+          return;
+        }
+        showError('Could not analyze this URL. Make sure it is a live, publicly accessible website.');
+        return;
+      }
+
+      const cats = psi.lighthouseResult?.categories;
+      const audits = psi.lighthouseResult?.audits;
+      if (!cats) { showError('No data returned for this URL.'); return; }
+
+      scores = {
+        performance: Math.round((cats.performance?.score ?? 0) * 100),
+        seo: Math.round((cats.seo?.score ?? 0) * 100),
+        accessibility: Math.round((cats.accessibility?.score ?? 0) * 100),
+        bestPractices: Math.round((cats['best-practices']?.score ?? 0) * 100),
+      };
+
+      failingAudits = Object.values(audits || {})
+        .filter(a => a.score !== null && a.score !== undefined && a.score < 0.9 && a.title)
+        .sort((a, b) => (a.score ?? 0) - (b.score ?? 0))
+        .slice(0, 8)
+        .map(a => `- ${a.title}${a.displayValue ? `: ${a.displayValue}` : ''}`);
+
+    } catch (e) {
+      showError('Could not reach the audit service. Please try again.');
+      return;
+    }
+
+    // Show scores immediately
+    setScore('score-performance', scores.performance);
+    setScore('score-seo', scores.seo);
+    setScore('score-accessibility', scores.accessibility);
+    setScore('score-best-practices', scores.bestPractices);
+    loading.classList.add('hidden');
+    results.classList.remove('hidden');
+    btn.disabled = false;
+    btn.textContent = 'Analyze My Site';
+
+    // Step 2: Get Claude analysis from backend
+    loadingMsg.textContent = 'Generating AI breakdown…';
+    loading.classList.remove('hidden');
+    try {
+      const res = await fetch('/api/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url, scores, failingAudits, pageContent }),
+      });
+      const data = await res.json();
+      if (data.analysis) {
+        const bullets = data.analysis.split('\n').map(l => l.trim()).filter(l => l.startsWith('•'));
+        if (bullets.length > 0) {
+          analysisText.innerHTML = bullets.map(b => `<p>${b}</p>`).join('');
+          analysisBox.classList.remove('hidden');
+        }
+      }
+    } catch {
+      // Analysis unavailable — scores already shown, that's fine
+    } finally {
+      loading.classList.add('hidden');
+    }
+  });
+
+  urlInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') btn.click(); });
+</script>
