@@ -105,5 +105,19 @@ const schema = {
   </head>
   <body class="bg-gray-950 text-gray-100 antialiased" style="font-family: 'Inter', sans-serif;">
     <slot />
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll('[data-animate]').forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>

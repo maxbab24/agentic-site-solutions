@@ -30,19 +30,23 @@ const values = [
 <section class="py-24 bg-gray-900">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <p class="text-emerald-400 text-xs font-bold uppercase tracking-widest text-center mb-3">
+    <p data-animate="fade-up" class="text-emerald-400 text-xs font-bold uppercase tracking-widest text-center mb-3">
       How We're Different
     </p>
-    <h2 class="text-3xl sm:text-4xl font-bold text-white text-center mb-4">
+    <h2 data-animate="fade-up" data-delay="100" class="text-3xl sm:text-4xl font-bold text-white text-center mb-4">
       AI isn't the future of web design.<br class="hidden sm:block" /> It's how we build right now.
     </h2>
-    <p class="text-gray-400 text-center max-w-xl mx-auto mb-12">
+    <p data-animate="fade-up" data-delay="200" class="text-gray-400 text-center max-w-xl mx-auto mb-12">
       We're not hiding it — we lean on AI hard. It's why our quality is high, our turnaround is fast, and our prices don't make you wince.
     </p>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-      {values.map((value) => (
-        <div class="border border-gray-800 bg-gray-900 hover:border-emerald-500/50 rounded-xl p-8 transition-colors duration-300">
+      {values.map((value, i) => (
+        <div
+          data-animate="fade-up"
+          data-delay={String((i + 1) * 100)}
+          class="border border-gray-800 bg-gray-900 hover:border-emerald-500/50 rounded-xl p-8 transition-colors duration-300"
+        >
           <div class="text-4xl mb-5">{value.icon}</div>
           <h3 class="text-xl font-bold text-white mb-3">{value.title}</h3>
           <p class="text-gray-400 leading-relaxed">{value.description}</p>
