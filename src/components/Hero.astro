@@ -2,56 +2,152 @@
 ---
 
 <section
-  class="relative min-h-screen flex items-center justify-center bg-gray-950 overflow-hidden"
+  class="relative min-h-screen flex items-center bg-gray-950 overflow-hidden"
   style="background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16, 185, 129, 0.12) 0%, transparent 70%), #030712;"
 >
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32 pt-40">
-    <!-- Logo -->
-    <img data-animate="fade-up" src="/images/logo-full.png" alt="AgenticSiteSolutions" class="h-48 sm:h-64 w-auto mx-auto mb-6" />
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-32 pt-40">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-    <!-- Badge Pill -->
-    <div data-animate="fade-up" data-delay="100" class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-8">
-      ✦ Shamelessly AI-Powered
-    </div>
+      <!-- Left: Text -->
+      <div class="text-center lg:text-left">
 
-    <!-- H1 -->
-    <h1 data-animate="fade-up" data-delay="200" class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 max-w-4xl mx-auto">
-      We Use AI to Build Websites.<br class="hidden sm:block" /> That's Why We're Faster and Cheaper.
-    </h1>
-
-    <!-- Subheading -->
-    <p data-animate="fade-up" data-delay="300" class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-      Most agencies charge $5,000–$15,000 and take months. We ship in days for a fraction of that — because we let AI do the heavy lifting. Curious what that means for your site?
-    </p>
-
-    <!-- CTA Buttons -->
-    <div data-animate="fade-up" data-delay="400" class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
-      <a
-        href="#audit"
-        class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-8 py-3.5 rounded-lg transition-colors duration-200 text-base"
-      >
-        Scan My Website Free
-      </a>
-      <a
-        href="#how-it-works"
-        class="w-full sm:w-auto border border-gray-700 hover:border-emerald-500/50 text-gray-100 hover:text-emerald-400 font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 text-base"
-      >
-        How It Works
-      </a>
-    </div>
-
-    <!-- Stat Pills -->
-    <div data-animate="fade-up" data-delay="500" class="flex flex-col sm:flex-row items-center justify-center gap-3">
-      {[
-        { label: 'Days, Not Months', icon: '⚡' },
-        { label: 'Fraction of Agency Cost', icon: '💰' },
-        { label: 'AI Does the Heavy Lifting', icon: '🤖' },
-      ].map((stat) => (
-        <div class="flex items-center gap-2 bg-gray-900 border border-gray-800 text-gray-300 text-sm font-semibold px-5 py-2 rounded-full">
-          <span>{stat.icon}</span>
-          <span>{stat.label}</span>
+        <!-- Badge Pill -->
+        <div data-animate="fade-up" class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-8">
+          ✦ Shamelessly AI-Powered
         </div>
-      ))}
+
+        <!-- H1 -->
+        <h1 data-animate="fade-up" data-delay="100" class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          We Build Websites That Get You
+          <span class="block text-emerald-400 min-h-[1.2em]">
+            <span id="typewriter-text"></span><span id="typewriter-cursor" class="inline-block w-0.5 h-[0.9em] bg-emerald-400 ml-0.5 align-middle"></span>
+          </span>
+        </h1>
+
+        <!-- Subheading -->
+        <p data-animate="fade-up" data-delay="200" class="text-lg sm:text-xl text-gray-400 max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
+          Most agencies charge $5,000–$15,000 and take months. We ship in days for a fraction of that — because we let AI do the heavy lifting.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div data-animate="fade-up" data-delay="300" class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
+          <a
+            href="#audit"
+            class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-8 py-3.5 rounded-lg transition-colors duration-200 text-base"
+          >
+            Scan My Website Free
+          </a>
+          <a
+            href="#how-it-works"
+            class="w-full sm:w-auto border border-gray-700 hover:border-emerald-500/50 text-gray-100 hover:text-emerald-400 font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 text-base"
+          >
+            How It Works
+          </a>
+        </div>
+
+        <!-- Stat Pills -->
+        <div data-animate="fade-up" data-delay="400" class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+          {[
+            { label: 'Days, Not Months', icon: '⚡' },
+            { label: 'Fraction of Agency Cost', icon: '💰' },
+            { label: 'AI Does the Heavy Lifting', icon: '🤖' },
+          ].map((stat) => (
+            <div class="flex items-center gap-2 bg-gray-900 border border-gray-800 text-gray-300 text-sm font-semibold px-5 py-2 rounded-full">
+              <span>{stat.icon}</span>
+              <span>{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: Cycling graphic -->
+      <div data-animate="fade-left" data-delay="200" class="flex items-center justify-center">
+        <div class="relative w-72 h-72 sm:w-96 sm:h-96">
+          <!--
+            CYCLING IMAGES
+            Replace these src paths with your generated images.
+            Suggested filenames:
+              /images/hero-1.png  — donkey typing on a laptop
+              /images/hero-2.png  — donkey holding an "OPEN" sign
+              /images/hero-3.png  — donkey looking at phone with 5 stars
+              /images/hero-4.png  — donkey with a rocket launching
+            All images are currently set to logo-icon.png as placeholder.
+          -->
+          {[
+            '/images/logo-icon.png',
+            '/images/logo-icon.png',
+            '/images/logo-icon.png',
+            '/images/logo-icon.png',
+          ].map((src, i) => (
+            <img
+              src={src}
+              alt="AgenticSiteSolutions"
+              class="hero-slide absolute inset-0 w-full h-full object-contain transition-opacity duration-700"
+              style={i === 0 ? 'opacity:1' : 'opacity:0'}
+            />
+          ))}
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
+<script>
+  // ── Typewriter ──
+  const phrases = [
+    'more customers online.',
+    'found on Google fast.',
+    'ahead of your competition.',
+    'live in days, not months.',
+    'results — not just a pretty page.',
+  ];
+
+  const textEl = document.getElementById('typewriter-text')!;
+  const cursorEl = document.getElementById('typewriter-cursor')!;
+
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  function tick() {
+    const phrase = phrases[phraseIndex];
+    if (!deleting) {
+      textEl.textContent = phrase.slice(0, charIndex + 1);
+      charIndex++;
+      if (charIndex === phrase.length) {
+        deleting = true;
+        setTimeout(tick, 2200);
+        return;
+      }
+      setTimeout(tick, 75);
+    } else {
+      textEl.textContent = phrase.slice(0, charIndex - 1);
+      charIndex--;
+      if (charIndex === 0) {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+      }
+      setTimeout(tick, 35);
+    }
+  }
+
+  // Blink cursor
+  setInterval(() => {
+    cursorEl.style.opacity = cursorEl.style.opacity === '0' ? '1' : '0';
+  }, 530);
+
+  tick();
+
+  // ── Cycling images ──
+  const slides = document.querySelectorAll<HTMLImageElement>('.hero-slide');
+  let current = 0;
+
+  if (slides.length > 1) {
+    setInterval(() => {
+      slides[current].style.opacity = '0';
+      current = (current + 1) % slides.length;
+      slides[current].style.opacity = '1';
+    }, 3000);
+  }
+</script>
