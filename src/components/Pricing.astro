@@ -1,61 +1,61 @@
 ---
-const plans = [
+const tiers = [
   {
-    name: 'Basic',
-    price: '$500',
-    upkeep: '$50',
-    tagline: 'Landing page & simple contact form — live fast, look sharp',
-    popular: false,
-    features: [
-      'Single-page or multi-section landing page',
-      'Simple contact form',
-      'Mobile-first design',
-      'Basic SEO setup',
-      'Fast static hosting (Netlify/Vercel)',
-      '2 revision rounds',
+    label: 'Get Online Fast',
+    range: 'From $500',
+    upkeep: '$50/mo',
+    tagline: 'You need a clean, professional presence — fast.',
+    outcomes: [
+      'Customers find you when they search your name',
+      'Looks sharp on any phone or screen',
+      'Contact form so leads can reach you directly',
+      'Shows up in Google from day one',
+      'Live in days, not weeks',
     ],
+    popular: false,
+    cta: 'Get a Free Quote',
   },
   {
-    name: 'Pro',
-    price: '$1,000',
-    upkeep: '$100',
-    tagline: 'Full-stack site with user data, auth, or dynamic features',
-    popular: true,
-    features: [
-      'Everything in Basic',
-      'Database integration (user accounts, bookings, etc.)',
-      'Next.js or equivalent dynamic framework',
-      'Custom backend logic & API routes',
-      'Advanced SEO + schema markup',
-      '3 revision rounds',
-      '30-day post-launch support',
+    label: 'Built to Grow',
+    range: 'From $1,000',
+    upkeep: '$100/mo',
+    tagline: 'You want more than a brochure — bookings, accounts, or custom tools.',
+    outcomes: [
+      'Everything in the starter tier',
+      'Online bookings, accounts, or a customer portal',
+      'Pulls in real data — menus, inventory, schedules',
+      'Built to rank — advanced SEO and schema',
+      '30 days of support after launch',
     ],
+    popular: true,
+    cta: 'Get a Free Quote',
   },
 ];
 ---
 
 <section id="pricing" class="py-24 bg-gray-900">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Section Label -->
-    <p class="text-emerald-400 text-xs font-bold uppercase tracking-widest text-center mb-3">
-      Pricing
-    </p>
-    <h2 class="text-3xl sm:text-4xl font-bold text-white text-center mb-12">
-      Simple, Transparent Pricing
-    </h2>
 
-    <!-- Cards -->
+    <p class="text-emerald-400 text-xs font-bold uppercase tracking-widest text-center mb-3">
+      Investment
+    </p>
+    <h2 class="text-3xl sm:text-4xl font-bold text-white text-center mb-4">
+      What does it cost?
+    </h2>
+    <p class="text-gray-400 text-center max-w-xl mx-auto mb-12">
+      Most clients are up and running between $500–$2,500. Every project starts with a free conversation — no pressure, no surprises.
+    </p>
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto mb-12">
-      {plans.map((plan) => (
+      {tiers.map((tier) => (
         <div
           class={`relative border rounded-xl p-8 flex flex-col transition-colors duration-300 ${
-            plan.popular
+            tier.popular
               ? 'border-emerald-500 bg-gray-950'
               : 'border-gray-800 bg-gray-900 hover:border-emerald-500/50'
           }`}
         >
-          {/* Most Popular Badge */}
-          {plan.popular && (
+          {tier.popular && (
             <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
               <span class="bg-emerald-500 text-gray-950 text-xs font-bold px-4 py-1 rounded-full whitespace-nowrap">
                 Most Popular
@@ -63,24 +63,23 @@ const plans = [
             </div>
           )}
 
-          <h3 class="text-xl font-bold text-white mb-1">{plan.name}</h3>
-          <p class="text-gray-400 text-sm mb-6">{plan.tagline}</p>
+          <h3 class="text-xl font-bold text-white mb-1">{tier.label}</h3>
+          <p class="text-gray-400 text-sm mb-6">{tier.tagline}</p>
 
           <div class="mb-8">
             <div class="text-4xl font-bold text-white">
-              {plan.price}
-              <span class="text-base font-normal text-gray-400"> one-time</span>
+              {tier.range}
             </div>
             <div class="text-sm text-gray-400 mt-1">
-              + <span class="text-gray-300 font-medium">{plan.upkeep}/mo</span> upkeep
+              + <span class="text-gray-300 font-medium">{tier.upkeep}</span> upkeep
             </div>
           </div>
 
           <ul class="space-y-3 mb-8 flex-1">
-            {plan.features.map((feature) => (
+            {tier.outcomes.map((outcome) => (
               <li class="flex items-start gap-3 text-sm text-gray-300">
                 <span class="text-emerald-400 mt-0.5 shrink-0">✓</span>
-                {feature}
+                {outcome}
               </li>
             ))}
           </ul>
@@ -88,23 +87,23 @@ const plans = [
           <a
             href="#contact"
             class={`block text-center font-bold py-3 rounded-lg transition-colors duration-200 ${
-              plan.popular
+              tier.popular
                 ? 'bg-emerald-500 hover:bg-emerald-400 text-gray-950'
                 : 'border border-gray-700 hover:border-emerald-500/50 text-gray-100 hover:text-emerald-400'
             }`}
           >
-            Get Started
+            {tier.cta}
           </a>
         </div>
       ))}
     </div>
 
-    <!-- Custom CTA -->
     <p class="text-center text-gray-400">
       Need something custom?{' '}
       <a href="#contact" class="text-emerald-400 hover:text-emerald-300 font-semibold underline underline-offset-2">
         Let's talk.
       </a>
     </p>
+
   </div>
 </section>
