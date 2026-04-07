@@ -8,15 +8,21 @@ const steps = [
   },
   {
     number: '2',
-    title: 'We Rebuild It',
+    title: 'AI Builds the Draft',
     description:
-      'Our AI-assisted workflow reconstructs your site with modern tech — Astro, Tailwind, optimized images, and full SEO.',
+      'Our AI workflow reconstructs your site with modern tech — fast hosting, optimized images, and SEO built in from the start.',
   },
   {
     number: '3',
-    title: 'Launch in Days',
+    title: 'We Review, You Approve',
     description:
-      'We deploy to Netlify, connect your domain, and hand you a fast, beautiful, Google-ready site.',
+      'A real person on our team goes through everything before you see it. You get a chance to request changes — we don\'t ship until you\'re happy.',
+  },
+  {
+    number: '4',
+    title: 'Launch & Stay in Control',
+    description:
+      'We go live, connect your domain, and hand you a site you can actually edit yourself. No developer needed for day-to-day updates.',
   },
 ];
 ---
@@ -32,7 +38,7 @@ const steps = [
     </h2>
 
     <!-- Steps -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
       {steps.map((step) => (
         <div class="flex flex-col items-center text-center md:items-start md:text-left">
           <!-- Number Circle -->

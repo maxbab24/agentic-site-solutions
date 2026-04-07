@@ -18,6 +18,12 @@ const values = [
     description:
       'No bloated agency overhead. No account managers who just forward emails. You get a professional result at a price that actually makes sense.',
   },
+  {
+    icon: '👀',
+    title: 'Human Eyes on Everything',
+    description:
+      'AI does the heavy lifting, but a real person reviews every site before it ships. And once it\'s live, you can make edits yourself — no developer required.',
+  },
 ];
 ---
 
@@ -34,7 +40,7 @@ const values = [
       We're not hiding it — we lean on AI hard. It's why our quality is high, our turnaround is fast, and our prices don't make you wince.
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
       {values.map((value) => (
         <div class="border border-gray-800 bg-gray-900 hover:border-emerald-500/50 rounded-xl p-8 transition-colors duration-300">
           <div class="text-4xl mb-5">{value.icon}</div>
