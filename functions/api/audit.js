@@ -6,29 +6,34 @@ export async function onRequestPost({ request, env }) {
     const anthropicKey = env.ANTHROPIC_API_KEY;
     if (!anthropicKey) return json({ ok: false, error: 'Analysis unavailable.' }, 500);
 
-    const prompt = `You are a web consultant for AgenticSiteSolutions, which rebuilds outdated small business websites.
+    const prompt = `You are a friendly website advisor writing to a small business owner — think restaurant owner, salon owner, plumber. They are not technical at all. You are reviewing their website and explaining what's wrong in simple, everyday language.
 
-A small business owner just got their site audited. Google PageSpeed Insights results:
+Here is their website data:
 
 URL: ${url}
-Performance: ${scores.performance}/100
-SEO: ${scores.seo}/100
-Accessibility: ${scores.accessibility}/100
-Best Practices: ${scores.bestPractices}/100
+Speed score: ${scores.performance}/100${scores.loadTime ? ` (actual load time: ${scores.loadTime})` : ''}${scores.lcp ? ` (main content loads in: ${scores.lcp})` : ''}
+Google findability score: ${scores.seo}/100
+Accessibility score: ${scores.accessibility}/100
+Overall quality score: ${scores.bestPractices}/100
 
-Top technical issues detected:
-${(failingAudits || []).length > 0 ? failingAudits.join('\n') : '- No specific failing audits'}
+Issues found on the site:
+${(failingAudits || []).length > 0 ? failingAudits.join('\n') : '- None detected'}
 
-Homepage content:
-- Page title: ${pageContent?.title || 'Not available'}
-- Meta description: ${pageContent?.metaDesc || 'Missing'}
-- H1 headings: ${pageContent?.h1s?.join(' | ') || 'None found'}
-- H2 headings: ${pageContent?.h2s?.join(' | ') || 'None found'}
-- Body text sample: ${pageContent?.bodyText || 'Not available'}
+Their homepage:
+- Page title: ${pageContent?.title || 'Not set'}
+- Description shown in Google search results: ${pageContent?.metaDesc || 'Missing — nothing shows up in Google'}
+- Main headline: ${pageContent?.h1s?.join(' | ') || 'None found'}
+- Section headings: ${pageContent?.h2s?.join(' | ') || 'None found'}
+- Page content: ${pageContent?.bodyText || 'Not available'}
 
-Write a short, plain-English breakdown for a non-technical business owner. 3–4 bullet points. Use both the technical scores AND the homepage content to give specific, personalized observations — mention actual content from their site where relevant. Focus on real business consequences: losing customers, poor Google rankings, lost trust. End with one short sentence about how these issues are all fixable.
+Write 3–4 bullet points explaining what's wrong. Rules:
+- Use zero technical terms. No "H1", no "meta description", no "LCP", no "accessibility", no "semantic structure". Translate everything into plain English a business owner would understand.
+- Only use real numbers from the data above — never invent load times or statistics.
+- Tie every issue to a real business consequence they'd care about: losing customers, not showing up on Google, looking unprofessional.
+- Reference actual content from their site where possible to make it feel personal.
+- End with one short encouraging sentence — these problems are common and fixable.
 
-Format: bullet points only using the • character. No markdown headers. No technical jargon. Under 130 words total.`;
+Format: bullet points only using the • character. No bold. No headers. Under 140 words total.`;
 
     const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',

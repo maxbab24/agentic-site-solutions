@@ -202,6 +202,10 @@ const psiKey = import.meta.env.PUBLIC_PAGESPEED_API_KEY ?? '';
         .slice(0, 8)
         .map(a => `- ${a.title}${a.displayValue ? `: ${a.displayValue}` : ''}`);
 
+      // Pull real metrics to prevent Claude from making up numbers
+      scores.loadTime = audits?.['interactive']?.displayValue ?? audits?.['speed-index']?.displayValue ?? null;
+      scores.lcp = audits?.['largest-contentful-paint']?.displayValue ?? null;
+
     } catch (e) {
       showError('Could not reach the audit service. Please try again.');
       return;
