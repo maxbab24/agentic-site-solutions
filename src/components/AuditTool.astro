@@ -230,7 +230,7 @@ const psiKey = import.meta.env.PUBLIC_PAGESPEED_API_KEY ?? '';
       if (data.analysis) {
         const bullets = data.analysis.split('\n').map(l => l.trim()).filter(l => l.startsWith('•'));
         if (bullets.length > 0) {
-          analysisText.innerHTML = bullets.map(b => `<p>${b}</p>`).join('');
+          analysisText.innerHTML = bullets.map(b => `<p>${b.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`).join('');
           analysisBox.classList.remove('hidden');
         }
       }
