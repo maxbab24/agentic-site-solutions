@@ -11,7 +11,7 @@ export async function onRequestPost({ request, env }) {
 Here is their website data:
 
 URL: ${url}
-Speed score: ${scores.performance}/100${scores.loadTime ? ` (main content loads in: ${scores.loadTime})` : ''}${scores.fcp ? ` (first thing appears on screen in: ${scores.fcp})` : ''}
+Speed score: ${scores.performance}/100${scores.loadTime ? ` (main content loads in ${scores.loadTime} on a slow mobile connection)` : ''}${scores.fcp ? ` (first thing appears in ${scores.fcp} on mobile)` : ''}
 Google findability score: ${scores.seo}/100
 Accessibility score: ${scores.accessibility}/100
 Overall quality score: ${scores.bestPractices}/100
@@ -28,7 +28,7 @@ Their homepage:
 
 Write 3–4 bullet points explaining what's wrong. Rules:
 - Use zero technical terms. No "H1", no "meta description", no "LCP", no "accessibility", no "semantic structure". Translate everything into plain English a business owner would understand.
-- Only use real numbers from the data above — never invent load times or statistics.
+- Only use real numbers from the data above — never invent load times or statistics. When mentioning load times, always attribute them to slow mobile connections (that's how they're measured) — never imply it's how fast the site loads for everyone.
 - Tie every issue to a real business consequence they'd care about: losing customers, not showing up on Google, looking unprofessional.
 - Reference actual content from their site where possible to make it feel personal.
 - End with one short encouraging sentence — these problems are common and fixable.
