@@ -11,8 +11,9 @@ const navLinks = [
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2">
-        <img src="/images/logo-icon.png" alt="AgenticSiteSolutions" class="h-12 w-auto" />
+      <a href="/" class="logo-wordmark group" aria-label="Agentic Site Solutions">
+        <span class="logo-top">AGENTIC<span class="logo-slash">/</span></span>
+        <span class="logo-bottom">SITE SOLUTIONS</span>
       </a>
 
       <!-- Nav Links (hidden on mobile) -->
@@ -37,3 +38,48 @@ const navLinks = [
     </div>
   </div>
 </nav>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500&display=swap');
+
+  .logo-wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    text-decoration: none;
+    gap: 1px;
+  }
+
+  .logo-top {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 0.12em;
+    color: #ffffff;
+    transition: color 0.2s ease;
+  }
+
+  .logo-slash {
+    color: #10b981;
+    margin-left: 1px;
+    font-weight: 800;
+  }
+
+  .logo-bottom {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: #6b7280;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+  }
+
+  .logo-wordmark:hover .logo-top {
+    color: #10b981;
+  }
+
+  .logo-wordmark:hover .logo-bottom {
+    color: #9ca3af;
+  }
+</style>

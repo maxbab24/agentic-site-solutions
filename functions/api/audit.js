@@ -11,7 +11,7 @@ export async function onRequestPost({ request, env }) {
 Here is their website data:
 
 URL: ${url}
-Speed score: ${scores.performance}/100${scores.loadTime ? ` (actual load time: ${scores.loadTime})` : ''}${scores.lcp ? ` (main content loads in: ${scores.lcp})` : ''}
+Speed score: ${scores.performance}/100${scores.loadTime ? ` (main content loads in: ${scores.loadTime})` : ''}${scores.fcp ? ` (first thing appears on screen in: ${scores.fcp})` : ''}
 Google findability score: ${scores.seo}/100
 Accessibility score: ${scores.accessibility}/100
 Overall quality score: ${scores.bestPractices}/100
