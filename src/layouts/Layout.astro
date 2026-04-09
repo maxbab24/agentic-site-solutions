@@ -92,19 +92,27 @@ const schema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Syne + DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
-  <body class="bg-gray-950 text-gray-100 antialiased" style="font-family: 'Inter', sans-serif;">
-    <slot />
+  <body class="text-gray-100 antialiased" style="font-family: 'DM Sans', sans-serif; background: #030712;">
+    <!-- Page-level aurora — fixed, covers full viewport as you scroll -->
+    <div class="page-aurora" aria-hidden="true">
+      <div class="pa-blob pa-blob-1"></div>
+      <div class="pa-blob pa-blob-2"></div>
+      <div class="pa-blob pa-blob-3"></div>
+    </div>
+    <div class="relative z-10">
+      <slot />
+    </div>
     <script>
       const observer = new IntersectionObserver(
         (entries) => {

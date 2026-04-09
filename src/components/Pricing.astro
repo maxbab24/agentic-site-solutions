@@ -33,7 +33,7 @@ const tiers = [
 ];
 ---
 
-<section id="pricing" class="py-24 bg-gray-900">
+<section id="pricing" class="py-24 section-panel">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <p data-animate="fade-up" class="text-emerald-400 text-xs font-bold uppercase tracking-widest text-center mb-3">
@@ -53,8 +53,8 @@ const tiers = [
           data-delay={String((i + 1) * 150)}
           class={`relative border rounded-xl p-8 flex flex-col transition-colors duration-300 ${
             tier.popular
-              ? 'border-emerald-500 bg-gray-950'
-              : 'border-gray-800 bg-gray-900 hover:border-emerald-500/50'
+              ? 'border-emerald-500 bg-[#060d18]'
+              : 'border-white/8 bg-[#060d18] hover:border-emerald-500/50'
           }`}
         >
           {tier.popular && (

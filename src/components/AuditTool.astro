@@ -2,7 +2,7 @@
 const psiKey = import.meta.env.PUBLIC_PAGESPEED_API_KEY ?? '';
 ---
 
-<section id="audit" class="py-24 bg-gray-900 border-y border-gray-800">
+<section id="audit" class="relative py-24 section-panel">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Header -->
@@ -22,7 +22,7 @@ const psiKey = import.meta.env.PUBLIC_PAGESPEED_API_KEY ?? '';
         id="audit-url"
         type="text"
         placeholder="yoursite.com"
-        class="flex-1 bg-gray-950 border border-gray-700 focus:border-emerald-500 text-gray-100 placeholder-gray-600 rounded-lg px-4 py-3 text-sm outline-none transition-colors duration-200"
+        class="flex-1 bg-[#060d18] border border-white/8 focus:border-emerald-500 text-gray-100 placeholder-gray-600 rounded-lg px-4 py-3 text-sm outline-none transition-colors duration-200"
       />
       <button
         id="audit-btn"
@@ -51,26 +51,26 @@ const psiKey = import.meta.env.PUBLIC_PAGESPEED_API_KEY ?? '';
 
       <!-- Score Cards -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
-        <div class="bg-gray-950 border border-gray-800 rounded-xl p-5 text-center">
+        <div class="bg-[#060d18] border border-white/8 rounded-xl p-5 text-center">
           <div id="score-performance" class="text-4xl font-bold mb-1">—</div>
           <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold">Performance</div>
         </div>
-        <div class="bg-gray-950 border border-gray-800 rounded-xl p-5 text-center">
+        <div class="bg-[#060d18] border border-white/8 rounded-xl p-5 text-center">
           <div id="score-seo" class="text-4xl font-bold mb-1">—</div>
           <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold">SEO</div>
         </div>
-        <div class="bg-gray-950 border border-gray-800 rounded-xl p-5 text-center">
+        <div class="bg-[#060d18] border border-white/8 rounded-xl p-5 text-center">
           <div id="score-accessibility" class="text-4xl font-bold mb-1">—</div>
           <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold">Accessibility</div>
         </div>
-        <div class="bg-gray-950 border border-gray-800 rounded-xl p-5 text-center">
+        <div class="bg-[#060d18] border border-white/8 rounded-xl p-5 text-center">
           <div id="score-best-practices" class="text-4xl font-bold mb-1">—</div>
           <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold">Best Practices</div>
         </div>
       </div>
 
       <!-- AI Analysis -->
-      <div id="audit-analysis" class="hidden bg-gray-950 border border-gray-800 rounded-xl p-6 mb-8">
+      <div id="audit-analysis" class="hidden bg-[#060d18] border border-white/8 rounded-xl p-6 mb-8">
         <p class="text-xs text-emerald-400 uppercase tracking-widest font-semibold mb-4">What this means for your business</p>
         <div id="audit-analysis-text" class="text-gray-300 text-sm leading-relaxed space-y-2"></div>
       </div>

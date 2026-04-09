@@ -1,39 +1,39 @@
 ---
 const services = [
   {
-    icon: '🔨',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg>`,
     title: 'Website Rebuild',
     description: 'Complete redesign from your existing site',
   },
   {
-    icon: '📍',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>`,
     title: 'SEO Foundation',
     description: 'Schema, sitemap, meta tags, local optimization',
   },
   {
-    icon: '📱',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 8.25h3" /></svg>`,
     title: 'Mobile-First Design',
     description: 'Looks perfect on every device',
   },
   {
-    icon: '🖼️',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>`,
     title: 'WebP Image Optimization',
     description: 'Faster loads, better Core Web Vitals',
   },
   {
-    icon: '🚀',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.338-2.32 5.75 5.75 0 011.348 10.594" /></svg>`,
     title: 'Cloudflare Hosting',
     description: 'Global CDN, lightning-fast load times worldwide',
   },
   {
-    icon: '🤖',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>`,
     title: 'AI-Optimized Content',
     description: 'FAQ sections and answer-first content for AI search',
   },
 ];
 ---
 
-<section id="services" class="py-24 bg-gray-900">
+<section id="services" class="py-24 section-panel">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <p data-animate="fade-up" class="text-emerald-400 text-xs font-bold uppercase tracking-widest text-center mb-3">
@@ -48,9 +48,9 @@ const services = [
         <div
           data-animate="fade-up"
           data-delay={String((i % 3 + 1) * 100)}
-          class="border border-gray-800 bg-gray-950/50 hover:border-emerald-500/50 rounded-xl p-6 transition-colors duration-300"
+          class="border border-white/8 bg-[#060d18] hover:border-emerald-500/50 rounded-xl p-6 transition-colors duration-300"
         >
-          <div class="text-2xl mb-3">{service.icon}</div>
+          <div class="w-6 h-6 text-emerald-400 mb-4" set:html={service.icon} />
           <h3 class="text-base font-bold text-white mb-1">{service.title}</h3>
           <p class="text-sm text-gray-400">{service.description}</p>
         </div>

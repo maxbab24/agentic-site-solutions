@@ -1,25 +1,25 @@
 ---
 const values = [
   {
-    icon: '🤖',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" /></svg>`,
     title: 'AI Builds It. We Ship It.',
     description:
       'We use AI systems to analyze, design, and build your site — the same technology powering the biggest companies in the world, now working for your small business.',
   },
   {
-    icon: '⚡',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>`,
     title: 'Days, Not Months',
     description:
       'Traditional agencies bill for hours. We automate the slow parts and pass the time savings to you. Most sites go live within a week.',
   },
   {
-    icon: '💰',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
     title: 'Half the Price',
     description:
       'No bloated agency overhead. No account managers who just forward emails. You get a professional result at a price that actually makes sense.',
   },
   {
-    icon: '👀',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
     title: 'Human Eyes on Everything',
     description:
       'AI does the heavy lifting, but a real person reviews every site before it ships. You get dedicated revision rounds to make sure it\'s exactly what you envisioned.',
@@ -27,7 +27,7 @@ const values = [
 ];
 ---
 
-<section class="py-24 bg-gray-900">
+<section class="py-24 section-panel">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <p data-animate="fade-up" class="text-emerald-400 text-xs font-bold uppercase tracking-widest text-center mb-3">
@@ -45,9 +45,9 @@ const values = [
         <div
           data-animate="fade-up"
           data-delay={String((i + 1) * 100)}
-          class="border border-gray-800 bg-gray-900 hover:border-emerald-500/50 rounded-xl p-8 transition-colors duration-300"
+          class="border border-white/8 bg-[#060d18] hover:border-emerald-500/50 rounded-xl p-8 transition-colors duration-300"
         >
-          <div class="text-4xl mb-5">{value.icon}</div>
+          <div class="w-7 h-7 text-emerald-400 mb-5" set:html={value.icon} />
           <h3 class="text-xl font-bold text-white mb-3">{value.title}</h3>
           <p class="text-gray-400 leading-relaxed">{value.description}</p>
         </div>

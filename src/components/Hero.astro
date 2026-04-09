@@ -1,77 +1,162 @@
 ---
 ---
 
-<section
-  class="relative min-h-screen flex items-center bg-gray-950 overflow-hidden"
-  style="background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16, 185, 129, 0.12) 0%, transparent 70%), #030712;"
->
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-32 pt-40">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<section class="relative h-screen flex items-start overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 pb-8 h-full flex flex-col">
+    <div class="flex flex-col items-center text-center justify-center flex-1 gap-5">
 
-      <!-- Left: Text -->
-      <div class="text-center lg:text-left">
-
-        <!-- Badge Pill -->
-        <div data-animate="fade-up" class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-8">
-          ✦ Shamelessly AI-Powered
-        </div>
-
-        <!-- H1 -->
-        <h1 data-animate="fade-up" data-delay="100" class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-          We Build Websites That Get You
-          <span class="block text-emerald-400 h-[1.4em] overflow-hidden">
-            <span id="typewriter-text"></span><span id="typewriter-cursor" class="inline-block w-0.5 h-[0.9em] bg-emerald-400 ml-0.5 align-middle"></span>
-          </span>
-        </h1>
-
-        <!-- Subheading -->
-        <p data-animate="fade-up" data-delay="200" class="text-lg sm:text-xl text-gray-400 max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
-          Most agencies charge $5,000–$15,000 and take months. We ship in days for a fraction of that — because we let AI do the heavy lifting.
-        </p>
-
-        <!-- CTA Buttons -->
-        <div data-animate="fade-up" data-delay="300" class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
-          <a
-            href="#audit"
-            class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-8 py-3.5 rounded-lg transition-colors duration-200 text-base"
-          >
-            Scan My Website Free
-          </a>
-          <a
-            href="#how-it-works"
-            class="w-full sm:w-auto border border-gray-700 hover:border-emerald-500/50 text-gray-100 hover:text-emerald-400 font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 text-base"
-          >
-            How It Works
-          </a>
-        </div>
-
-        <!-- Stat Pills -->
-        <div data-animate="fade-up" data-delay="400" class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-          {[
-            { label: 'Days, Not Months', icon: '⚡' },
-            { label: 'Fraction of Agency Cost', icon: '💰' },
-            { label: 'AI Does the Heavy Lifting', icon: '🤖' },
-          ].map((stat) => (
-            <div class="flex items-center gap-2 bg-gray-900 border border-gray-800 text-gray-300 text-sm font-semibold px-5 py-2 rounded-full">
-              <span>{stat.icon}</span>
-              <span>{stat.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Right: Cycling graphic -->
-      <div data-animate="fade-left" data-delay="200" class="flex items-center justify-center">
+      <!-- Logo -->
+      <div data-animate="fade-up">
         <img
           src="/images/logo-full.png"
-          alt="AgenticSiteSolutions"
-          class="w-full scale-125 object-contain"
+          alt="Agentic Site Solutions"
+          class="h-64 sm:h-80 w-auto object-contain"
         />
+      </div>
+
+      <!-- Badge Pill -->
+      <div data-animate="fade-up" data-delay="100" class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold px-4 py-1.5 rounded-full">
+        ✦ Shamelessly AI-Powered
+      </div>
+
+      <!-- H1 -->
+      <h1 data-animate="fade-up" data-delay="200" class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-3xl">
+        We Build Websites That Get You
+        <span class="block text-emerald-400 h-[1.4em] overflow-hidden">
+          <span id="typewriter-text"></span><span id="typewriter-cursor" class="inline-block w-0.5 h-[0.9em] bg-emerald-400 ml-0.5 align-middle"></span>
+        </span>
+      </h1>
+
+      <!-- Subheading -->
+      <p data-animate="fade-up" data-delay="300" class="text-lg sm:text-xl text-gray-400 max-w-xl leading-relaxed">
+        Most agencies charge $5,000–$15,000 and take months. We ship in days for a fraction of that — because we let AI do the heavy lifting.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div data-animate="fade-up" data-delay="400" class="flex flex-col sm:flex-row items-center gap-4">
+        <a
+          href="#audit"
+          class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-8 py-3.5 rounded-lg transition-colors duration-200 text-base"
+        >
+          Scan My Website Free
+        </a>
+        <a
+          href="#how-it-works"
+          class="w-full sm:w-auto border border-gray-700 hover:border-emerald-500/50 text-gray-100 hover:text-emerald-400 font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 text-base"
+        >
+          How It Works
+        </a>
+      </div>
+
+      <!-- Stat Pills -->
+      <div data-animate="fade-up" data-delay="500" class="flex flex-wrap items-center justify-center gap-3 pb-2">
+        {[
+          {
+            label: 'Days, Not Months',
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>`
+          },
+          {
+            label: 'Fraction of Agency Cost',
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
+          },
+          {
+            label: 'AI Does the Heavy Lifting',
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>`
+          },
+        ].map((stat) => (
+          <div class="flex items-center gap-2 bg-[#060d18] border border-white/8 text-gray-300 text-sm font-semibold px-5 py-2 rounded-full">
+            <span class="text-emerald-400" set:html={stat.icon} />
+            <span>{stat.label}</span>
+          </div>
+        ))}
       </div>
 
     </div>
   </div>
 </section>
+
+<style>
+  .hero-section {
+    background: #030712;
+  }
+
+  /* Aurora mesh */
+  .aurora {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .aurora-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0;
+    animation: aurora-fade-in 1.2s ease forwards;
+  }
+
+  .aurora-blob-1 {
+    width: 60vw;
+    height: 50vh;
+    background: radial-gradient(ellipse, rgba(16, 185, 129, 0.18) 0%, transparent 70%);
+    top: -10%;
+    left: 20%;
+    animation-delay: 0s;
+    animation: aurora-fade-in 1.2s ease forwards, drift-1 18s ease-in-out infinite 1.2s;
+  }
+
+  .aurora-blob-2 {
+    width: 45vw;
+    height: 40vh;
+    background: radial-gradient(ellipse, rgba(16, 185, 129, 0.10) 0%, transparent 70%);
+    top: 30%;
+    right: -5%;
+    animation: aurora-fade-in 1.4s ease forwards, drift-2 22s ease-in-out infinite 1.4s;
+  }
+
+  .aurora-blob-3 {
+    width: 35vw;
+    height: 35vh;
+    background: radial-gradient(ellipse, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+    bottom: 10%;
+    left: -5%;
+    animation: aurora-fade-in 1.6s ease forwards, drift-3 26s ease-in-out infinite 1.6s;
+  }
+
+  @keyframes aurora-fade-in {
+    to { opacity: 1; }
+  }
+
+  @keyframes drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(4%, 3%) scale(1.05); }
+    66%       { transform: translate(-3%, 5%) scale(0.97); }
+  }
+
+  @keyframes drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(-5%, -3%) scale(1.04); }
+    66%       { transform: translate(3%, -6%) scale(1.02); }
+  }
+
+  @keyframes drift-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(6%, -4%) scale(0.96); }
+    66%       { transform: translate(-4%, 4%) scale(1.03); }
+  }
+
+  /* Grain overlay */
+  .grain {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+  }
+</style>
 
 <script>
   // ── Typewriter ──
